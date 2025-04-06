@@ -92,6 +92,12 @@ function App() {
 
   const slides = [
     {
+      title: 'Собственное производство',
+      subtitle: 'Качество, которое восхищает',
+      imageSrc: ' https://storage.yandexcloud.net/ilia/Stanki.mp4',
+      type: 'video' as 'video',
+    },
+    {
       title: 'Премиальные решения с камнем',
       subtitle: 'Создайте пространство, которое восхищает',
       imageSrc: 'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg',

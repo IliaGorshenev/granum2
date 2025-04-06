@@ -217,3 +217,52 @@ export const AnimatedText = styled.div<{ delay?: number }>`
   animation: ${fadeInUp} 0.8s ease-out forwards;
   animation-delay: ${(props) => props.delay || 0}s;
 `;
+
+// Add this to your existing styled components
+export const VideoBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out;
+  animation: fadeIn 1s forwards;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  video {
+    width: 120%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+`;
+
+// Add this to your existing styled components
+export const VideoFallback = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+`;

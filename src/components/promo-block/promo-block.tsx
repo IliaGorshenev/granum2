@@ -13,12 +13,14 @@ import {
   SliderContainer,
   SliderContent,
   SliderDots,
+  VideoBackground,
 } from './styles';
 
 interface PromoSlide {
   title: string;
   subtitle: string;
   imageSrc: string;
+  type?: 'image' | 'video';
 }
 
 interface PromoBlockProps {
@@ -26,7 +28,6 @@ interface PromoBlockProps {
   buttonText: string;
   onButtonClick: () => void;
 }
-
 const PromoBlock: React.FC<PromoBlockProps> = ({ slides, buttonText, onButtonClick }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -38,10 +39,27 @@ const PromoBlock: React.FC<PromoBlockProps> = ({ slides, buttonText, onButtonCli
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
 
+  const renderBackground = () => {
+    const slide = slides[currentSlide];
+    const slideType = slide.type || 'image';
+
+    if (slideType === 'video') {
+      return (
+        <VideoBackground>
+          <video autoPlay muted loop playsInline poster={slide.imageSrc} onError={(e) => console.error('Video loading error:', e)}>
+            <source src={slide.imageSrc} type="video/mp4" />
+          </video>
+        </VideoBackground>
+      );
+    }
+
+    return <FullPageBackground imageSrc={slide.imageSrc} />;
+  };
+
   return (
     <PromoContainer>
-      <FullPageBackground imageSrc={slides[currentSlide].imageSrc} />
-  
+      {renderBackground()}
+
       <SliderContainer>
         <ContentWrapper>
           <SliderContent>
@@ -64,7 +82,7 @@ const PromoBlock: React.FC<PromoBlockProps> = ({ slides, buttonText, onButtonCli
             <Dot key={index} active={index === currentSlide} onClick={() => setCurrentSlide(index)} />
           ))}
         </SliderDots>
-  
+
         <LeftArrowIcon onClick={goToPrevSlide} position="left" />
         <RightArrowIcon onClick={goToNextSlide} position="right" />
       </SliderContainer>
