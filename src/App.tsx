@@ -5,6 +5,7 @@ import FeedbackForm from './components/feedback-form';
 import Footer from './components/footer';
 import Header from './components/header/header';
 import PromoBlock from './components/promo-block/promo-block';
+import WorksSlider from './components/works/works';
 
 // Creating styled components
 const AppContainer = styled.div`
@@ -60,32 +61,32 @@ function App() {
   const completedWorks = [
     {
       id: 1,
-      title: 'Marble Kitchen Countertop',
-      description: 'Custom-cut Carrara marble countertop with waterfall edge',
+      title: 'Мраморная кухонная столешница',
+      description: 'Столешница из мрамора Каррара с водопадным краем по индивидуальному заказу',
       imageSrc: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     },
     {
       id: 2,
-      title: 'Granite Bathroom Vanity',
-      description: 'Black granite vanity top with double undermount sinks',
+      title: 'Гранитная столешница для ванной',
+      description: 'Черная гранитная столешница с двойной встроенной раковиной',
       imageSrc: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     },
     {
       id: 3,
-      title: 'Travertine Outdoor Patio',
-      description: 'Natural travertine stone pavers for outdoor living space',
+      title: 'Патио из травертина',
+      description: 'Натуральные плиты из травертина для открытой зоны отдыха',
       imageSrc: 'https://images.unsplash.com/photo-1591825729269-caeb344f6df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     },
     {
       id: 4,
-      title: 'Quartz Office Reception Desk',
-      description: 'Custom engineered quartz reception counter with LED lighting',
+      title: 'Кварцевая стойка ресепшн',
+      description: 'Стойка ресепшн из кварцевого агломерата с LED-подсветкой по индивидуальному заказу',
       imageSrc: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     },
     {
       id: 5,
-      title: 'Slate Feature Wall',
-      description: 'Natural split-face slate wall cladding for modern interior',
+      title: 'Декоративная стена из сланца',
+      description: 'Облицовка стены натуральным колотым сланцем для современного интерьера',
       imageSrc: 'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     },
   ];
@@ -128,7 +129,7 @@ function App() {
       <PromoBlock slides={slides} buttonText="К каталогу" onButtonClick={scrollToCatalog} />
       <Catalog></Catalog>
       {/* <WorkSlider works={completedWorks} /> */}
-
+      <WorksSlider works={completedWorks} />
       <FeedbackForm telegramBotToken="7694051593:AAGBls3mX5vQwvn4s95-gdOZHD9_96aNC7U"></FeedbackForm>
       <Footer></Footer>
     </AppContainer>

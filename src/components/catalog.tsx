@@ -145,7 +145,6 @@ export const parseExcelFile = (filePath: string): CatalogItem[] => {
   }
 };
 
-// Styled components
 const CatalogContainer = styled.div`
   max-width: 1400px;
   box-sizing: border-box;
@@ -157,6 +156,7 @@ const CatalogContainer = styled.div`
   border-radius: 20px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.03);
   margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 `;
 
 const CatalogTitle = styled.h2`

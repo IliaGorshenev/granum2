@@ -6,43 +6,12 @@ interface FeedbackFormProps {
   backgroundImage?: string;
 }
 
-const FormSection = styled.section`
-  width: 100%;
-  padding: 4rem 1rem;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
-  box-sizing: border-box;
-`;
-
-const BackgroundContainer = styled.div<{ backgroundImage?: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: ${(props) => (props.backgroundImage ? `url(${props.backgroundImage})` : 'none')};
-  background-size: cover;
-  background-position: center;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
-    z-index: 1;
-  }
-`;
-
 const FormContainer = styled.div`
-  width: 100%;
+  width: 50%;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
+  margin-right: auto;
+  margin-left: 9.5rem;
   padding: 2.5rem;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
@@ -135,9 +104,8 @@ const TextArea = styled.textarea`
     color: #aaa;
   }
 `;
-
 const SubmitButton = styled.button`
-  background-color: #4caf50;
+  background-color: #000;
   color: white;
   border: none;
   padding: 1rem 1.5rem;
@@ -152,26 +120,51 @@ const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s;
+  }
 
   &:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #222;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+
+    &::before {
+      left: 100%;
+    }
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   }
 
   &:disabled {
-    background-color: #cccccc;
+    background-color: #333;
     cursor: not-allowed;
     transform: none;
-    box-shadow: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
+
+    &::before {
+      display: none;
+    }
   }
 
   svg {
     margin-right: 0.5rem;
+    fill: white;
   }
 `;
 
@@ -217,6 +210,152 @@ const Row = styled.div`
   & > * {
     flex: 1;
   }
+`;
+
+export const MapButton = styled.a`
+  display: flex;
+  align-items: center;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+`;
+
+export const MapIcon = styled.span`
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+`;
+
+const BackgroundContainer = styled.div<{ backgroundImage?: string }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: ${(props) => (props.backgroundImage ? `url(${props.backgroundImage})` : 'none')};
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+    z-index: 1;
+  }
+`;
+
+const FormSection = styled.section`
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: transparent;
+  box-sizing: border-box;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 1rem;
+  }
+`;
+
+const ContactInfo = styled.div`
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 40%;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  backdrop-filter: blur(5px);
+
+  @media (max-width: 1024px) {
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    margin: 2rem auto 0;
+  }
+`;
+
+const ContactInfoItem = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const ContactIcon = styled.div`
+  color: #4caf50;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContactLabel = styled.h4`
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+`;
+
+const ContactText = styled.p`
+  margin: 0;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.4;
+`;
+
+const MapBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+`;
+
+const MapOverlay = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const FeedbackForm: React.FC<FeedbackFormProps> = ({
@@ -295,8 +434,29 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   };
 
   return (
-    <FormSection id='contact'>
-      <BackgroundContainer backgroundImage={backgroundImage} />
+    <FormSection id="contact">
+      <MapBackground>
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1&amp;source=constructor&amp;ll=61.332730%2C54.763927&amp;z=16&amp;pt=61.332730%2C54.763927&amp;mode=search"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          title="Yandex Map"
+          allow="geolocation"></iframe>
+        <MapOverlay>
+          <MapButton
+            href="https://yandex.ru/navi?whatshere%5Bpoint%5D=61.33273%2C54.763927&whatshere%5Bzoom%5D=16.378338&ll=61.33194851236024%2C54.76582432159952&z=16.378338&si=b424cw1cxdm409m74y2u51dxag"
+            target="_blank"
+            rel="noopener noreferrer">
+            <MapIcon>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg>
+            </MapIcon>
+            Открыть на карте
+          </MapButton>
+        </MapOverlay>
+      </MapBackground>
       <FormContainer>
         <Title>Свяжитесь с нами</Title>
         <Form onSubmit={handleSubmit}>
@@ -355,23 +515,20 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
           <SubmitButton type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" className="bi bi-hourglass-split" viewBox="0 0 16 16">
-                  <path
-                    d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-hourglass-split" viewBox="0 0 16 16">
+                  <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z" />
                 </svg>
                 Отправка...
               </>
             ) : (
               <>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" className="bi bi-send" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-send" viewBox="0 0 16 16">
                   <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
                 </svg>
                 Отправить сообщение
               </>
             )}
           </SubmitButton>
-
           {status && (
             <StatusMessage isError={status.isError}>
               {status.isError ? (
@@ -392,6 +549,57 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
 
         <FormFooter>Мы ценим вашу конфиденциальность. Ваша информация будет использоваться только для ответа на ваш запрос.</FormFooter>
       </FormContainer>
+      {/* <ContactInfo>
+        <ContactInfoItem>
+          <ContactIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+            </svg>
+          </ContactIcon>
+          <div>
+            <ContactLabel>Адрес</ContactLabel>
+            <ContactText>г. Магнитогорск, ул. Примерная, 123</ContactText>
+          </div>
+        </ContactInfoItem>
+
+        <ContactInfoItem>
+          <ContactIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+            </svg>
+          </ContactIcon>
+          <div>
+            <ContactLabel>Телефон</ContactLabel>
+            <ContactText>+7 (123) 456-7890</ContactText>
+          </div>
+        </ContactInfoItem>
+
+        <ContactInfoItem>
+          <ContactIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+            </svg>
+          </ContactIcon>
+          <div>
+            <ContactLabel>Email</ContactLabel>
+            <ContactText>info@example.com</ContactText>
+          </div>
+        </ContactInfoItem>
+
+        <ContactInfoItem>
+          <ContactIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+            </svg>
+          </ContactIcon>
+          <div>
+            <ContactLabel>Часы работы</ContactLabel>
+            <ContactText>Пн-Пт: 9:00 - 18:00</ContactText>
+            <ContactText>Сб-Вс: Выходной</ContactText>
+          </div>
+        </ContactInfoItem>
+      </ContactInfo> */}
     </FormSection>
   );
 };
