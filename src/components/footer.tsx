@@ -272,9 +272,7 @@ const Footer: React.FC<FooterProps> = () => {
       <FooterContent>
         <FooterSection>
           <FooterTitle>О компании Гранум</FooterTitle>
-          <FooterText>
-            ООО "Гранум" - это качественный и надежный сервис, который помогает людям претворять идеи в реальность.
-          </FooterText>
+          <FooterText>ООО "Гранум" - это качественный и надежный сервис, который помогает людям претворять идеи в реальность.</FooterText>
           {/* <SocialLinks>
             <SocialIcon href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fab fa-facebook-f"></i>
@@ -315,9 +313,9 @@ const Footer: React.FC<FooterProps> = () => {
               <i className="fas fa-map-marker-alt"></i>
             </ContactIcon>
             <FooterText>
-              ул. Каменная, 123
+              456581, Челябинская область, м.р-н Еманжелинский,
               <br />
-              г. Мраморный, 12345
+              г.п. Еманжелинское, г Еманжелинск, ул Советская, дом 11Б
             </FooterText>
           </ContactItem>
           <ContactItem>
@@ -330,19 +328,19 @@ const Footer: React.FC<FooterProps> = () => {
             <ContactIcon>
               <i className="fas fa-envelope"></i>
             </ContactIcon>
-            <FooterText>info@granumstone.ru</FooterText>
+            <FooterText>Alulianov@yandex.ru</FooterText>
           </ContactItem>
           <ContactItem>
             <ContactIcon>
               <i className="fas fa-clock"></i>
             </ContactIcon>
-            <FooterText>Пн-Пт 9:00-17:00</FooterText>
+            <FooterText>Пн-Пт 8:00-19:00</FooterText>
           </ContactItem>
 
           {/* <NewsletterForm>
-            <NewsletterInput type="email" placeholder="Подпишитесь на новости" />
-            <SubscribeButton type="submit">Подписаться</SubscribeButton>
-          </NewsletterForm> */}
+    <NewsletterInput type="email" placeholder="Подпишитесь на новости" />
+    <SubscribeButton type="submit">Подписаться</SubscribeButton>
+  </NewsletterForm> */}
         </FooterSection>
       </FooterContent>
 

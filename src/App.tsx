@@ -173,10 +173,11 @@ function App() {
       <PromoBlock slides={slides} buttonText="К каталогу" onButtonClick={scrollToCatalog} />
       <Catalog></Catalog>
       {/* <WorkSlider works={completedWorks} /> */}
-      <AboutCompany />
+
       <WorksSlider works={completedWorks} onWorkClick={handleWorkClick} />
       {isModalOpen && selectedWork && <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} product={selectedWork} />}
       <FeedbackForm telegramBotToken="7694051593:AAGBls3mX5vQwvn4s95-gdOZHD9_96aNC7U"></FeedbackForm>
+      <AboutCompany />
       <Footer></Footer>
     </AppContainer>
   );
