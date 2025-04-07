@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({
               </a>
             </NavLink>
             <NavLink isScrolled={isScrolled}>
-              <a href="#portfolio" onClick={(e) => scrollToSection(e, 'portfolio')}>
+              <a href="#works" onClick={(e) => scrollToSection(e, 'works')}>
                 Работы
               </a>
             </NavLink>
@@ -95,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({
           </a>
         </MobileNavLink>
         <MobileNavLink>
-          <a href="#portfolio" onClick={(e) => scrollToSection(e, 'portfolio')}>
+          <a href="#works" onClick={(e) => scrollToSection(e, 'works')}>
             Работы
           </a>
         </MobileNavLink>

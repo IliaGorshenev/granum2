@@ -444,7 +444,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
           title="Yandex Map"
           allow="geolocation"></iframe>
         <MapOverlay>
-          <MapButton
+          {/* <MapButton
             href="https://yandex.ru/navi?whatshere%5Bpoint%5D=61.33273%2C54.763927&whatshere%5Bzoom%5D=16.378338&ll=61.33194851236024%2C54.76582432159952&z=16.378338&si=b424cw1cxdm409m74y2u51dxag"
             target="_blank"
             rel="noopener noreferrer">
@@ -454,7 +454,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
               </svg>
             </MapIcon>
             Открыть на карте
-          </MapButton>
+          </MapButton> */}
         </MapOverlay>
       </MapBackground>
       <FormContainer>

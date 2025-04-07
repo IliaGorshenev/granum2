@@ -198,7 +198,7 @@ const FooterNavLink = styled.a`
 const ContactItem = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.3rem;
 `;
 
 const ContactIcon = styled.span`
@@ -273,10 +273,9 @@ const Footer: React.FC<FooterProps> = () => {
         <FooterSection>
           <FooterTitle>О компании Гранум</FooterTitle>
           <FooterText>
-            Гранум Стоун Воркс специализируется на преобразовании высококачественного природного камня в потрясающие элементы для жилых и коммерческих помещений, сочетая
-            традиционное мастерство с современными технологиями.
+            ООО "Гранум" - это качественный и надежный сервис, который помогает людям претворять идеи в реальность.
           </FooterText>
-          <SocialLinks>
+          {/* <SocialLinks>
             <SocialIcon href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="fab fa-facebook-f"></i>
             </SocialIcon>
@@ -289,26 +288,25 @@ const Footer: React.FC<FooterProps> = () => {
             <SocialIcon href="https://houzz.com" target="_blank" rel="noopener noreferrer" aria-label="Houzz">
               <i className="fab fa-houzz"></i>
             </SocialIcon>
-          </SocialLinks>
+          </SocialLinks> */}
         </FooterSection>
 
         <FooterSection>
           <FooterTitle>Быстрые ссылки</FooterTitle>
-          <FooterLink href="#home">Главная</FooterLink>
           <FooterLink href="#catalog">Каталог</FooterLink>
-          <FooterLink href="#portfolio">Портфолио</FooterLink>
+          <FooterLink href="#works">Портфолио</FooterLink>
           <FooterLink href="#about">О нас</FooterLink>
           <FooterLink href="#contact">Контакты</FooterLink>
         </FooterSection>
 
-        <FooterSection>
+        {/* <FooterSection>
           <FooterTitle>Услуги</FooterTitle>
           <FooterLink href="#countertops">Столешницы</FooterLink>
           <FooterLink href="#flooring">Напольные покрытия</FooterLink>
           <FooterLink href="#walls">Облицовка стен</FooterLink>
           <FooterLink href="#custom">Индивидуальные проекты</FooterLink>
           <FooterLink href="#maintenance">Обслуживание и ремонт</FooterLink>
-        </FooterSection>
+        </FooterSection> */}
 
         <FooterSection>
           <FooterTitle>Свяжитесь с нами</FooterTitle>
@@ -326,7 +324,7 @@ const Footer: React.FC<FooterProps> = () => {
             <ContactIcon>
               <i className="fas fa-phone-alt"></i>
             </ContactIcon>
-            <FooterText>+7 (555) 123-4567</FooterText>
+            <FooterText>+7 912 790 26 95</FooterText>
           </ContactItem>
           <ContactItem>
             <ContactIcon>
@@ -349,7 +347,7 @@ const Footer: React.FC<FooterProps> = () => {
       </FooterContent>
 
       <BottomBar>
-        <Copyright>© {currentYear} Гранум Стоун Воркс. Все права защищены.</Copyright>
+        <Copyright>© {currentYear} ООО "Гранум". Все права защищены.</Copyright>
         <FooterNav>
           <FooterNavLink href="/privacy">Политика конфиденциальности</FooterNavLink>
           <FooterNavLink href="/terms">Условия использования</FooterNavLink>
