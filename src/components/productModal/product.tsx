@@ -77,6 +77,14 @@ const CloseButton = styled.button`
   &:hover {
     background: rgba(0, 0, 0, 0.8);
   }
+
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
 `;
 
 const MainImageContainer = styled.div`
@@ -87,6 +95,10 @@ const MainImageContainer = styled.div`
   overflow: hidden;
   padding: 20px;
   position: relative;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const MainImage = styled.img`
@@ -94,6 +106,10 @@ const MainImage = styled.img`
   max-height: 85vh;
   object-fit: contain;
   transition: opacity 0.3s ease;
+
+  @media (max-width: 768px) {
+    max-height: 75vh;
+  }
 `;
 
 const ThumbnailsContainer = styled.div`
@@ -103,18 +119,23 @@ const ThumbnailsContainer = styled.div`
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-x: auto;
-  
+
   &::-webkit-scrollbar {
     height: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: #333;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: #666;
     border-radius: 3px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 5px;
+    gap: 6px;
   }
 `;
 
@@ -133,6 +154,16 @@ const ThumbnailImage = styled.img<{ isSelected: boolean }>`
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     opacity: 1;
   }
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 45px;
+    border-width: 2px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
 `;
 
 const ProductTitle = styled.h2`
@@ -148,23 +179,48 @@ const ProductTitle = styled.h2`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  
+
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
     max-width: 60%;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    max-width: 50%;
+  }
+`;
+
+// Add this after the ProductTitle styled component
+const NavigationArrow = styled.div`
+  @media (max-width: 768px) {
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
 
 const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product }) => {
   const [selectedImage, setSelectedImage] = useState(product.imageSrc);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   // Combine main image with additional images for the gallery
   const allImages = [product.imageSrc, ...(product.additionalImages || [])];
 
   // Set initial index based on the selected image
   useEffect(() => {
-    const index = allImages.findIndex(img => img === selectedImage);
+    const index = allImages.findIndex((img) => img === selectedImage);
     setCurrentIndex(index >= 0 ? index : 0);
   }, [selectedImage, allImages]);
 
@@ -217,11 +273,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
 
         <MainImageContainer>
           <MainImage src={selectedImage} alt={product.title} />
-          
+
           {allImages.length > 1 && (
             <>
-              <LeftArrowIcon onClick={goToPrevImage} position="left" />
-              <RightArrowIcon onClick={goToNextImage} position="right" />
+              <NavigationArrow>
+                <LeftArrowIcon onClick={goToPrevImage} position="left" />
+              </NavigationArrow>
+              <NavigationArrow>
+                <RightArrowIcon onClick={goToNextImage} position="right" />
+              </NavigationArrow>
             </>
           )}
         </MainImageContainer>

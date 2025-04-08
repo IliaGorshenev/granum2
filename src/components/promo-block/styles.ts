@@ -5,6 +5,10 @@ export const PromoContainer = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 100vh; /* Ensure full height on mobile */
+  }
 `;
 export const FullPageBackground = styled.div<{ imageSrc: string }>`
   position: absolute;
@@ -34,17 +38,41 @@ export const SliderContainer = styled.div`
   text-align: center;
   width: 80%;
   max-width: 800px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+  }
 `;
 
 export const ContentWrapper = styled.div`
   position: relative;
   padding: 20px;
   border-radius: 10px;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 `;
 export const SliderContent = styled.div`
   padding: 3rem;
   border-radius: 15px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 `;
 export const PromoTitle = styled.h1`
   font-size: 3.5rem;
@@ -101,6 +129,16 @@ export const ButtonImage = styled.img`
   height: 24px;
   animation: ${pulse} 3s ease-in-out infinite;
   transform-style: preserve-3d;
+
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 export const PromoButton = styled.button`
@@ -147,6 +185,10 @@ export const SliderDots = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+
+  @media (max-width: 480px) {
+    margin-top: 0.75rem;
+  }
 `;
 
 export const Dot = styled.div<{ active: boolean }>`
@@ -160,6 +202,12 @@ export const Dot = styled.div<{ active: boolean }>`
 
   &:hover {
     transform: scale(1.2);
+  }
+
+  @media (max-width: 480px) {
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
   }
 `;
 
@@ -198,6 +246,20 @@ export const ArrowButton = styled.button<{ position: 'left' | 'right' }>`
     width: 100%;
     height: 100%;
     fill: currentColor;
+  }
+
+  @media (max-width: 768px) {
+    &:before {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &:before {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 `;
 
@@ -250,6 +312,14 @@ export const VideoBackground = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 0;
+
+    @media (max-width: 768px) {
+      width: 130%; /* Slightly wider to ensure coverage on mobile */
+    }
+
+    @media (max-width: 480px) {
+      width: 150%; /* Even wider for small screens */
+    }
   }
 `;
 
@@ -265,4 +335,14 @@ export const VideoFallback = styled.p`
   text-align: center;
   font-size: 16px;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+    font-size: 12px;
+  }
 `;

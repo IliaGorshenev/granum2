@@ -157,6 +157,18 @@ const CatalogContainer = styled.div`
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.03);
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+  }
 `;
 
 const CatalogTitle = styled.h2`
@@ -200,6 +212,11 @@ const CatalogGrid = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 `;
 
@@ -269,6 +286,17 @@ const Card = styled.div`
   &:hover:before {
     transform: scaleX(1);
   }
+
+  @media (max-width: 768px) {
+    &:active {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active:before {
+      transform: scaleX(1);
+    }
+  }
 `;
 
 const CardImage = styled.div<{ bgImage: string }>`
@@ -292,10 +320,18 @@ const CardImage = styled.div<{ bgImage: string }>`
   ${Card}:hover & {
     transform: scale(1.08);
   }
+
+  @media (max-width: 480px) {
+    height: 200px;
+  }
 `;
 
 const CardContent = styled.div`
   padding: 2rem;
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 `;
 
 const CardTitle = styled.h3`
@@ -308,6 +344,10 @@ const CardTitle = styled.h3`
 
   ${Card}:hover & {
     color: #3b7a57;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
   }
 `;
 
@@ -453,6 +493,17 @@ const ModalContent = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
   }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  @media (max-width: 480px) {
+    width: 98%;
+    max-height: 98vh;
+    border-radius: 15px;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -466,6 +517,15 @@ const ModalHeader = styled.div`
   background: white;
   z-index: 10;
   border-radius: 20px 20px 0 0;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 1.5rem;
+    border-radius: 15px 15px 0 0;
+  }
 `;
 
 const ModalTitle = styled.h2`
@@ -474,6 +534,14 @@ const ModalTitle = styled.h2`
   margin: 0;
   font-weight: 600;
   letter-spacing: -0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -494,10 +562,25 @@ const CloseButton = styled.button`
     color: #2d3748;
     background-color: #f7fafc;
   }
+
+   
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+  }
 `;
 
 const ModalBody = styled.div`
   padding: 2.5rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+  }
 `;
 
 const ModalContentLayout = styled.div`
@@ -527,6 +610,12 @@ const ModalImage = styled.img`
     width: 100%;
     height: 300px;
   }
+
+  @media (max-width: 480px) {
+    height: 220px;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+  }
 `;
 
 const ModalDescription = styled.p`
@@ -542,6 +631,18 @@ const ModalDescription = styled.p`
   @media (max-width: 1269px) {
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
 `;
 const ModalInfo = styled.div`
   display: flex;
@@ -552,17 +653,39 @@ const ModalInfo = styled.div`
   padding: 2rem;
   border-radius: 16px;
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+  }
 `;
 
 const InfoItem = styled.div`
   flex: 1;
   min-width: 220px;
+
+  @media (max-width: 480px) {
+    min-width: 100%;
+  }
 `;
 const InfoLabel = styled.h4`
   font-size: 1.1rem;
   color: #718096;
   margin-bottom: 0.5rem;
   font-weight: 600;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const InfoValue = styled.p`
@@ -578,6 +701,10 @@ const InfoValue = styled.p`
     height: 20px;
     margin-left: 5px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const PriceTable = styled.table`
@@ -587,6 +714,12 @@ const PriceTable = styled.table`
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   overflow: hidden;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+  }
 `;
 
 const TableHeader = styled.th`
@@ -605,6 +738,16 @@ const TableHeader = styled.th`
   &:last-child {
     border-top-right-radius: 12px;
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const TableCell = styled.td`
@@ -621,6 +764,16 @@ const TableCell = styled.td`
   tr:hover & {
     background-color: #f8fafc;
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+  }
 `;
 
 const fadeInUp = keyframes`
@@ -632,6 +785,8 @@ const fadeInUp = keyframes`
     opacity: 1;
     transform: translateY(0);
   }
+
+  
 `;
 
 const AnimatedCard = styled(Card)<{ delay: number }>`

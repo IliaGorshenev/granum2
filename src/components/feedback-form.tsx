@@ -19,6 +19,23 @@ const FormContainer = styled.div`
   position: relative;
   z-index: 2;
   backdrop-filter: blur(5px);
+
+
+  @media (max-width: 1024px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 1.5rem;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 480px) {
+    width: 83%;
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -36,6 +53,17 @@ const Title = styled.h2`
     height: 3px;
     background-color: #4caf50;
     margin: 0.8rem auto 0;
+  }
+
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -81,6 +109,17 @@ const Input = styled.input`
   &::placeholder {
     color: #aaa;
   }
+
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -102,6 +141,19 @@ const TextArea = styled.textarea`
 
   &::placeholder {
     color: #aaa;
+  }
+
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+    min-height: 120px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    min-height: 100px;
   }
 `;
 const SubmitButton = styled.button`
@@ -166,6 +218,18 @@ const SubmitButton = styled.button`
     margin-right: 0.5rem;
     fill: white;
   }
+
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
 `;
 
 const StatusMessage = styled.div<{ isError?: boolean }>`
@@ -184,6 +248,24 @@ const StatusMessage = styled.div<{ isError?: boolean }>`
   svg {
     margin-right: 0.5rem;
     font-size: 1.2rem;
+  }
+
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.7rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    
+    svg {
+      margin-right: 0.3rem;
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -210,6 +292,18 @@ const Row = styled.div`
   & > * {
     flex: 1;
   }
+
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+ 
 `;
 
 export const MapButton = styled.a`
@@ -270,11 +364,20 @@ const FormSection = styled.section`
   align-items: center;
   background-color: transparent;
   box-sizing: border-box;
+ 
 
   @media (max-width: 1024px) {
     flex-direction: column;
     justify-content: center;
     padding: 4rem 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 3rem 0.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 2rem 0.25rem;
   }
 `;
 
@@ -293,10 +396,20 @@ const ContactInfo = styled.div`
 
   @media (max-width: 1024px) {
     position: relative;
-    width: 100%;
+    width: 80%;
     left: 0;
     bottom: 0;
     margin: 2rem auto 0;
+  }
+  
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 1rem;
   }
 `;
 
@@ -356,6 +469,16 @@ const MapOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    top: 15px;
+    right: 15px;
+  }
+  
+  @media (max-width: 480px) {
+    top: 10px;
+    right: 10px;
+  }
 `;
 
 const FeedbackForm: React.FC<FeedbackFormProps> = ({
