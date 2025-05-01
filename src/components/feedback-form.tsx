@@ -20,10 +20,10 @@ const FormContainer = styled.div`
   z-index: 2;
   backdrop-filter: blur(5px);
 
-
   @media (max-width: 1024px) {
     width: 80%;
     margin: 0 auto;
+    order: 1;
   }
   
   @media (max-width: 768px) {
@@ -365,11 +365,11 @@ const FormSection = styled.section`
   background-color: transparent;
   box-sizing: border-box;
  
-
   @media (max-width: 1024px) {
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 4rem 1rem;
+    min-height: auto;
   }
   
   @media (max-width: 768px) {
@@ -459,8 +459,22 @@ const MapBackground = styled.div`
     height: 100%;
     border: 0;
   }
+  
+  @media (max-width: 1024px) {
+    position: relative;
+    height: 400px;
+    margin-top: 2rem;
+    order: 2;
+  }
+  
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 300px;
+  }
 `;
-
 const MapOverlay = styled.div`
   position: absolute;
   top: 20px;

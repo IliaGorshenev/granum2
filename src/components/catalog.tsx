@@ -237,6 +237,7 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  margin-top: auto;
 
   &:hover {
     background-color: #333;
@@ -328,7 +329,10 @@ const CardImage = styled.div<{ bgImage: string }>`
 
 const CardContent = styled.div`
   padding: 2rem;
-
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 4;
   @media (max-width: 480px) {
     padding: 1.5rem;
   }
@@ -341,6 +345,8 @@ const CardTitle = styled.h3`
   font-weight: 600;
   transition: color 0.3s ease;
   line-height: 1.3;
+  margin: 0;
+  margin-bottom: auto;
 
   ${Card}:hover & {
     color: #3b7a57;
@@ -793,6 +799,9 @@ const AnimatedCard = styled(Card)<{ delay: number }>`
   opacity: 0;
   animation: ${fadeInUp} 0.6s ease-out forwards;
   animation-delay: ${(props) => props.delay}s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 // Main component
 const Catalog: React.FC = () => {
