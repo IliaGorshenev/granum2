@@ -9,7 +9,7 @@ interface PriceItem {
   additional: string;
 }
 
-interface CatalogItem {
+export interface CatalogItem {
   id: number;
   name: string;
   description: string;
@@ -569,7 +569,6 @@ const CloseButton = styled.button`
     background-color: #f7fafc;
   }
 
-   
   @media (max-width: 480px) {
     width: 40px;
     height: 40px;
@@ -803,21 +802,29 @@ const AnimatedCard = styled(Card)<{ delay: number }>`
   flex-direction: column;
   justify-content: space-between;
 `;
+interface CatalogProps {
+  initialData?: CatalogItem[];
+}
 // Main component
-const Catalog: React.FC = () => {
-  const [catalogData, setCatalogData] = useState<CatalogItem[]>([]);
+const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
+  const [catalogData, setCatalogData] = useState<CatalogItem[]>(initialData);
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(initialData.length === 0);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // If we already have data from SSR, don't fetch again
+    if (initialData.length > 0) {
+      setCatalogData(initialData);
+      setLoading(false);
+      return;
+    }
+
     const fetchCatalogData = async () => {
       try {
         setLoading(true);
 
         // Replace this URL with the one you get after publishing your sheet to the web
-        // The format should be something like:
-        // https://docs.google.com/spreadsheets/d/e/2PACX-your-published-id/pub?output=csv
         const fileUrl =
           'https://docs.google.com/spreadsheets/d/e/2PACX-1vQnfEBU2jZvGQOqDX0hgA0dQXM9br26tBVhoN7ctaa1W4ChbfQkUrX6afNums1ZGA/pub?gid=1474798808&single=true&output=csv';
 
@@ -918,7 +925,7 @@ const Catalog: React.FC = () => {
     };
 
     fetchCatalogData();
-  }, []);
+  }, [initialData]);
 
   const openModal = (item: CatalogItem) => {
     setSelectedItem(item);

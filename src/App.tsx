@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import './App.css';
+
+
 import AboutCompany from './components/about/about';
-import Catalog from './components/catalog';
+import Catalog, { CatalogItem } from './components/catalog';
 import FeedbackForm from './components/feedback-form';
 import Footer from './components/footer';
 import Header from './components/header/header';
 import ProductModal from './components/productModal/product';
 import PromoBlock from './components/promo-block/promo-block';
 import WorksSlider from './components/works/works';
+import SEO from './SEO';
 
 // Creating styled components
 const AppContainer = styled.div`
@@ -62,134 +64,137 @@ interface WorkItem {
   additionalImages?: string[];
 }
 
-const SEO = () => {
-  useEffect(() => {
-    // Update document title
-    document.title = 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство';
+// const SEO = () => {
+//   useEffect(() => {
+//     // Update document title
+//     document.title = 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство';
 
-    // Update meta description
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        'content',
-        'Премиальные решения из натурального камня. Собственное производство изделий из гранита, мрамора и других натуральных камней. Качество, которое восхищает.',
-      );
-    } else {
-      const newMetaDescription = document.createElement('meta');
-      newMetaDescription.name = 'description';
-      newMetaDescription.content =
-        'Премиальные решения из натурального камня. Собственное производство изделий из гранита, мрамора и других натуральных камней. Качество, которое восхищает.';
-      document.head.appendChild(newMetaDescription);
-    }
+//     // Update meta description
+//     const metaDescription = document.querySelector('meta[name="description"]');
+//     if (metaDescription) {
+//       metaDescription.setAttribute(
+//         'content',
+//         'Премиальные решения из натурального камня. Собственное производство изделий из гранита, мрамора и других натуральных камней. Качество, которое восхищает.',
+//       );
+//     } else {
+//       const newMetaDescription = document.createElement('meta');
+//       newMetaDescription.name = 'description';
+//       newMetaDescription.content =
+//         'Премиальные решения из натурального камня. Собственное производство изделий из гранита, мрамора и других натуральных камней. Качество, которое восхищает.';
+//       document.head.appendChild(newMetaDescription);
+//     }
 
-    // Add meta keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute(
-        'content',
-        'натуральный камень Челябинск, гранит, мрамор, изделия из камня, столешницы, подоконники, ступени, облицовка, производство изделий из камня',
-      );
-    } else {
-      const newMetaKeywords = document.createElement('meta');
-      newMetaKeywords.name = 'keywords';
-      newMetaKeywords.content =
-        'натуральный камень Челябинск, гранит, мрамор, изделия из камня, столешницы, подоконники, ступени, облицовка, производство изделий из камня';
-      document.head.appendChild(newMetaKeywords);
-    }
+//     // Add meta keywords
+//     const metaKeywords = document.querySelector('meta[name="keywords"]');
+//     if (metaKeywords) {
+//       metaKeywords.setAttribute(
+//         'content',
+//         'натуральный камень Челябинск, гранит, мрамор, изделия из камня, столешницы, подоконники, ступени, облицовка, производство изделий из камня',
+//       );
+//     } else {
+//       const newMetaKeywords = document.createElement('meta');
+//       newMetaKeywords.name = 'keywords';
+//       newMetaKeywords.content =
+//         'натуральный камень Челябинск, гранит, мрамор, изделия из камня, столешницы, подоконники, ступени, облицовка, производство изделий из камня';
+//       document.head.appendChild(newMetaKeywords);
+//     }
 
-    // Add Open Graph tags
-    const siteUrl = window.location.origin;
-    const siteImage = 'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg';
+//     // Add Open Graph tags
+//     const siteUrl = window.location.origin;
+//     const siteImage = 'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg';
 
-    const ogTags = [
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: siteUrl },
-      { property: 'og:title', content: 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство' },
-      {
-        property: 'og:description',
-        content: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство изделий из гранита, мрамора и других натуральных камней.',
-      },
-      { property: 'og:image', content: siteImage },
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:url', content: siteUrl },
-      { property: 'twitter:title', content: 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство' },
-      { property: 'twitter:description', content: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство.' },
-      { property: 'twitter:image', content: siteImage },
-    ];
+//     const ogTags = [
+//       { property: 'og:type', content: 'website' },
+//       { property: 'og:url', content: siteUrl },
+//       { property: 'og:title', content: 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство' },
+//       {
+//         property: 'og:description',
+//         content: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство изделий из гранита, мрамора и других натуральных камней.',
+//       },
+//       { property: 'og:image', content: siteImage },
+//       { property: 'twitter:card', content: 'summary_large_image' },
+//       { property: 'twitter:url', content: siteUrl },
+//       { property: 'twitter:title', content: 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство' },
+//       { property: 'twitter:description', content: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство.' },
+//       { property: 'twitter:image', content: siteImage },
+//     ];
 
-    ogTags.forEach((tag) => {
-      const existingTag = document.querySelector(`meta[property="${tag.property}"]`);
-      if (existingTag) {
-        existingTag.setAttribute('content', tag.content);
-      } else {
-        const newTag = document.createElement('meta');
-        newTag.setAttribute('property', tag.property);
-        newTag.setAttribute('content', tag.content);
-        document.head.appendChild(newTag);
-      }
-    });
+//     ogTags.forEach((tag) => {
+//       const existingTag = document.querySelector(`meta[property="${tag.property}"]`);
+//       if (existingTag) {
+//         existingTag.setAttribute('content', tag.content);
+//       } else {
+//         const newTag = document.createElement('meta');
+//         newTag.setAttribute('property', tag.property);
+//         newTag.setAttribute('content', tag.content);
+//         document.head.appendChild(newTag);
+//       }
+//     });
 
-    // Add canonical link
-    const canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (canonicalLink) {
-      canonicalLink.setAttribute('href', siteUrl);
-    } else {
-      const newCanonicalLink = document.createElement('link');
-      newCanonicalLink.rel = 'canonical';
-      newCanonicalLink.href = siteUrl;
-      document.head.appendChild(newCanonicalLink);
-    }
+//     // Add canonical link
+//     const canonicalLink = document.querySelector('link[rel="canonical"]');
+//     if (canonicalLink) {
+//       canonicalLink.setAttribute('href', siteUrl);
+//     } else {
+//       const newCanonicalLink = document.createElement('link');
+//       newCanonicalLink.rel = 'canonical';
+//       newCanonicalLink.href = siteUrl;
+//       document.head.appendChild(newCanonicalLink);
+//     }
 
-    // Add JSON-LD structured data
-    const existingScript = document.querySelector('script[type="application/ld+json"]');
-    if (existingScript) {
-      document.head.removeChild(existingScript);
-    }
+//     // Add JSON-LD structured data
+//     const existingScript = document.querySelector('script[type="application/ld+json"]');
+//     if (existingScript) {
+//       document.head.removeChild(existingScript);
+//     }
 
-    const jsonLdScript = document.createElement('script');
-    jsonLdScript.type = 'application/ld+json';
-    jsonLdScript.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Гранум',
-      url: siteUrl,
-      logo: siteImage,
-      description: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство изделий из гранита, мрамора и других натуральных камней.',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Челябинск',
-        addressRegion: 'Челябинская область',
-        addressCountry: 'Россия',
-      },
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: '+7 912 790 26 95',
-        email: 'Alulianov@yandex.ru',
-        contactType: 'customer service',
-      },
-      // Add local business information
+//     const jsonLdScript = document.createElement('script');
+//     jsonLdScript.type = 'application/ld+json';
+//     jsonLdScript.textContent = JSON.stringify({
+//       '@context': 'https://schema.org',
+//       '@type': 'Organization',
+//       name: 'Гранум',
+//       url: siteUrl,
+//       logo: siteImage,
+//       description: 'Изделия из натурального камня в Челябинске по выгодным ценам. Собственное производство изделий из гранита, мрамора и других натуральных камней.',
+//       address: {
+//         '@type': 'PostalAddress',
+//         addressLocality: 'Челябинск',
+//         addressRegion: 'Челябинская область',
+//         addressCountry: 'Россия',
+//       },
+//       contactPoint: {
+//         '@type': 'ContactPoint',
+//         telephone: '+7 912 790 26 95',
+//         email: 'Alulianov@yandex.ru',
+//         contactType: 'customer service',
+//       },
+//       // Add local business information
 
-      priceRange: '₽₽₽',
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: '54.7518', // Coordinates for Emanjelinsk
-        longitude: '61.3215', // Coordinates for Emanjelinsk
-      },
-      openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '18:00',
-      },
-    });
+//       priceRange: '₽₽₽',
+//       geo: {
+//         '@type': 'GeoCoordinates',
+//         latitude: '54.7518', // Coordinates for Emanjelinsk
+//         longitude: '61.3215', // Coordinates for Emanjelinsk
+//       },
+//       openingHoursSpecification: {
+//         '@type': 'OpeningHoursSpecification',
+//         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+//         opens: '09:00',
+//         closes: '18:00',
+//       },
+//     });
 
-    document.head.appendChild(jsonLdScript);
-  }, []);
+//     document.head.appendChild(jsonLdScript);
+//   }, []);
 
-  return null; // This component doesn't render anything
-};
+//   return null; // This component doesn't render anything
+// };
 
-function App() {
+interface AppProps {
+  initialCatalogData?: CatalogItem[];
+}
+function App({ initialCatalogData = [] }: AppProps) {
   const handleLearnMore = () => {
     console.log('Learn more button clicked');
     // Add your navigation or modal logic here
@@ -300,7 +305,7 @@ function App() {
       <Header></Header>
 
       <PromoBlock slides={slides} buttonText="К каталогу" onButtonClick={scrollToCatalog} />
-      <Catalog></Catalog>
+      <Catalog initialData={initialCatalogData}></Catalog>
       {/* <WorkSlider works={completedWorks} /> */}
 
       <WorksSlider works={completedWorks} onWorkClick={handleWorkClick} />
