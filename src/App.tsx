@@ -137,7 +137,7 @@ function App({ initialCatalogData = [] }: AppProps) {
     {
       title: 'Собственное производство',
       subtitle: 'Качество, которое восхищает',
-      imageSrc: 'https://granum-stone.s3.regru.cloud/uploads/1746121312529-Stanki.mp4',
+      imageSrc: 'https://granum-stone.s3.regru.cloud/uploads/1746181310363-Stanki.mp4.crdownload.mp4',
       type: 'video' as 'video',
     },
     {
