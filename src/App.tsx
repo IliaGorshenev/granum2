@@ -116,6 +116,7 @@ function App({ initialCatalogData = [] }: AppProps) {
         'https://storage.yandexcloud.net/ilia/%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B/%D1%81%D1%82%D1%8B%D0%BA1.jpg',
       ],
     },
+    
     {
       id: 5,
       title: 'Входная группа: Дымовский гранит (обработан пропиткой с эффектом мокрого камня)',
