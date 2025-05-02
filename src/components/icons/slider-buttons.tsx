@@ -48,6 +48,11 @@ const ArrowWrapper = styled.div<{ position: 'left' | 'right' }>`
   transform: translateY(-50%);
   ${props => props.position === 'left' ? 'left: 20px;' : 'right: 20px;'}
   z-index: 10;
+
+  @media (max-width: 768px) {
+
+    transform:  translateY(56px) scale(0.8);
+  }
 `;
 
 interface ArrowIconProps {

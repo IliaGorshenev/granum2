@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LeftArrowIcon, RightArrowIcon } from '../icons/slider-buttons';
 import {
   AnimatedText,
@@ -29,7 +29,31 @@ interface PromoBlockProps {
   onButtonClick: () => void;
 }
 const PromoBlock: React.FC<PromoBlockProps> = ({ slides, buttonText, onButtonClick }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1); // Start with the second slide (index 1)
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Check if the first slide is a video
+    if (slides[0]?.type === 'video') {
+      // Preload the video
+      const videoElement = document.createElement('video');
+      videoElement.src = slides[0].imageSrc;
+      videoElement.preload = 'auto';
+
+      videoElement.addEventListener('canplay', () => {
+        setVideoLoaded(true);
+        // Switch to the video slide once it's loaded
+        setCurrentSlide(0);
+      });
+
+      // Handle potential errors
+      videoElement.addEventListener('error', (e) => {
+        console.error('Video loading error:', e);
+        // Keep showing the fallback image if video fails to load
+      });
+    }
+  }, [slides]);
 
   const goToPrevSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));
@@ -43,10 +67,17 @@ const PromoBlock: React.FC<PromoBlockProps> = ({ slides, buttonText, onButtonCli
     const slide = slides[currentSlide];
     const slideType = slide.type || 'image';
 
-    if (slideType === 'video') {
+    if (slideType === 'video' && videoLoaded) {
       return (
         <VideoBackground>
-          <video autoPlay muted loop playsInline poster={slide.imageSrc} onError={(e) => console.error('Video loading error:', e)}>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={slides[1]?.imageSrc} // Use the second slide as a poster
+            onError={(e) => console.error('Video playback error:', e)}>
             <source src={slide.imageSrc} type="video/mp4" />
           </video>
         </VideoBackground>

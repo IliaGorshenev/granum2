@@ -163,6 +163,7 @@ export const PromoButton = styled.button`
   @media (max-width: 768px) {
     font-size: 1rem;
     padding: 0.8rem 2rem;
+
   }
 
   @media (max-width: 480px) {
@@ -181,6 +182,7 @@ export const PromoButton = styled.button`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
+
 export const SliderDots = styled.div`
   display: flex;
   justify-content: center;
@@ -253,6 +255,8 @@ export const ArrowButton = styled.button<{ position: 'left' | 'right' }>`
       width: 1.75rem;
       height: 1.75rem;
     }
+
+  
   }
 
   @media (max-width: 480px) {
