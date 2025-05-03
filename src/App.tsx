@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-
 import AboutCompany from './components/about/about';
 import Catalog, { CatalogItem } from './components/catalog';
 import FeedbackForm from './components/feedback-form';
@@ -62,7 +61,7 @@ interface WorkItem {
   description?: string;
   imageSrc: string;
   additionalImages?: string[];
-} 
+}
 
 interface AppProps {
   initialCatalogData?: CatalogItem[];
@@ -138,7 +137,7 @@ function App({ initialCatalogData = [] }: AppProps) {
     {
       title: 'Собственное производство',
       subtitle: 'Качество, которое восхищает',
-      imageSrc: 'https://granum-stone.s3.regru.cloud/uploads/1746181310363-Stanki.mp4.crdownload.mp4',
+      imageSrc: Math.random() < 0.5 ? 'https://storage.yandexcloud.net/ilia/first_granum.mp4' : 'https://storage.yandexcloud.net/ilia/second_granum.mp4',
       type: 'video' as 'video',
     },
     {
