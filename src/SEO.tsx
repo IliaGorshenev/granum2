@@ -1,46 +1,3 @@
-// 'use client';
-
-// import Head from 'next/head';
-// import { usePathname } from 'next/navigation';
-
-// interface SEOProps {
-//   title?: string;
-//   description?: string;
-//   canonical?: string;
-//   ogImage?: string;
-// }
-
-// export default function SEO({
-//   title = 'Гранум - Изделия из натурального камня',
-//   description = 'Премиальные решения с камнем - создайте пространство, которое восхищает',
-//   canonical,
-//   ogImage = '/og-image.jpg',
-// }: SEOProps) {
-//   const pathname = usePathname();
-//   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://granum-stone.ru';
-//   const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${pathname}`;
-
-//   return (
-//     <Head>
-//       <title>{title}</title>
-//       <meta name="description" content={description} />
-//       <link rel="canonical" href={canonicalUrl} />
-
-//       {/* Open Graph */}
-//       <meta property="og:type" content="website" />
-//       <meta property="og:url" content={canonicalUrl} />
-//       <meta property="og:title" content={title} />
-//       <meta property="og:description" content={description} />
-//       <meta property="og:image" content={`${siteUrl}${ogImage}`} />
-
-//       {/* Twitter */}
-//       <meta name="twitter:card" content="summary_large_image" />
-//       <meta name="twitter:title" content={title} />
-//       <meta name="twitter:description" content={description} />
-//       <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
-//     </Head>
-//   );
-// }
 import { useEffect } from 'react';
 
 interface SEOProps {
@@ -52,9 +9,9 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = 'Гранум - Изделия из натурального камня в Челябинске | Собственное производство',
-  description = 'Премиальные решения из натурального камня. Собственное производство изделий из гранита, мрамора и других натуральных камней. Качество, которое восхищает.',
-  keywords = 'натуральный камень Челябинск, гранит, мрамор, изделия из камня, столешницы, подоконники, ступени, облицовка, производство изделий из камня',
+  title = 'Купить гранит и мрамор от производителя Гранум в Челябинске | Выгодные цены',
+  description = "Производство и продажа изделий из гранита и мрамора в Челябинске, Еманжелинске и во всех других регионах России от 'Гранум'. Заказать изделия из камня по выгодным ценам. Столешницы, ступени, подоконники, бордюры, балясины, толстомеры. Выгодные цены, доставка. Каталог и контакты.",
+  keywords = 'натуральный камень Челябинск, гранит, мрамор, купить камень, изделия из камня, производство изделий из камня, Гранум Челябинск, столешницы из камня, подоконники из камня, ступени из камня, облицовка камнем, бордюры гранитные, балясины из камня, толстомеры гранитные, камень от производителя, продажа камня, доставка камня, контакты Гранум, слэб, гранитные полосы, тактильные плиты',
   ogImage = 'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg',
   canonicalUrl,
 }: SEOProps) => {

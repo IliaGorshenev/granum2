@@ -116,13 +116,13 @@ export const getStaticProps: GetStaticProps = async () => {
     // Convert the map to an array
     const catalogData = Array.from(itemsMap.values());
     console.log('Final catalog data processed:', catalogData.length, 'items');
-    
+
     return {
       props: {
         catalogData: catalogData, // Return the actual data, not an empty array
       },
       // Revalidate every 24 hours (in seconds)
-      revalidate: 86400, // 24 * 60 * 60
+      revalidate: 3600, // 24 * 60 * 60
     };
   } catch (error) {
     console.error('Error fetching catalog data:', error);
@@ -131,7 +131,7 @@ export const getStaticProps: GetStaticProps = async () => {
         catalogData: [], // Return empty array in case of error
       },
       // Even if there's an error, still revalidate after 24 hours
-      revalidate: 86400,
+      revalidate: 3600,
     };
   }
-}
+};
