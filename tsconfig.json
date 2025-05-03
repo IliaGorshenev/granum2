@@ -17,6 +17,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["src", "pages/_app.tsx", "pages/_document.tsx", "pages/index.tsx", "src/App.tsx", "next.config.js"],
+  "include": ["src", "pages/_app.tsx", "pages/_document.tsx", "pages/index.tsx", "src/App.tsx", "next.config.js", "pages/404.tsx"],
   "exclude": ["node_modules"]
 }

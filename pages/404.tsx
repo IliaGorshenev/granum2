@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import SEO from '../SEO';
-
+import SEO from '../src/SEO';
 
 const NotFoundContainer = styled.div`
   display: flex;
