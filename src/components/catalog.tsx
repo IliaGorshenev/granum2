@@ -959,7 +959,7 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
     }, [selectedItem]);
 
   return (
-    
+
     <CatalogContainer>
       <CatalogTitle id="catalog">Каталог гранитных плит</CatalogTitle>
       <CatalogGrid>
@@ -1012,7 +1012,7 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
                   <tr>
                     <TableHeader>Размер</TableHeader>
                     <TableHeader>Термо</TableHeader>
-                    <TableHeader>Термо</TableHeader>
+                    <TableHeader>Полировка</TableHeader>
                   </tr>
                 </thead>
                 <tbody>
