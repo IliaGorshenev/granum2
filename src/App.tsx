@@ -136,7 +136,7 @@ function App({ initialCatalogData = [] }: AppProps) {
   const slides = [
     {
       title: 'Собственное производство',
-      subtitle: 'Качество, которое восхищает',
+      subtitle: 'Качество, котороCе восхищает',
       imageSrc: Math.random() < 0.5 ? 'https://storage.yandexcloud.net/ilia/first_granum.mp4' : 'https://storage.yandexcloud.net/ilia/second_granum.mp4',
       type: 'video' as 'video',
     },

@@ -943,6 +943,21 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
     return <div>Error: {error}</div>;
   }
 
+    // Add this useEffect to scroll to the price table when modal opens
+    useEffect(() => {
+      if (selectedItem) {
+        // Give a small delay to ensure the modal is fully rendered
+        const timer = setTimeout(() => {
+          const priceTableHeading = document.getElementById('price-table-heading');
+          if (priceTableHeading) {
+            priceTableHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+        
+        return () => clearTimeout(timer);
+      }
+    }, [selectedItem]);
+
   return (
     <CatalogContainer>
       <CatalogTitle id="catalog">Каталог гранитных плит</CatalogTitle>
@@ -990,13 +1005,13 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
                   </InfoValue>
                 </InfoItem>
               </ModalInfo>
-              <h3>Цены</h3>
+              <h3 id="price-table-heading">Цены</h3>
               <PriceTable>
                 <thead>
                   <tr>
                     <TableHeader>Размер</TableHeader>
-                    <TableHeader>Цена</TableHeader>
-                    <TableHeader>Дополнительно</TableHeader>
+                    <TableHeader>Термо</TableHeader>
+                    <TableHeader>Термо</TableHeader>
                   </tr>
                 </thead>
                 <tbody>
