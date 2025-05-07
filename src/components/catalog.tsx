@@ -959,6 +959,7 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
     }, [selectedItem]);
 
   return (
+    
     <CatalogContainer>
       <CatalogTitle id="catalog">Каталог гранитных плит</CatalogTitle>
       <CatalogGrid>
