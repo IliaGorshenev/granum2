@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import styled from 'styled-components';
 
 import AboutCompany from './components/about/about';
@@ -6,10 +6,12 @@ import Catalog, { CatalogItem } from './components/catalog';
 import FeedbackForm from './components/feedback-form';
 import Footer from './components/footer';
 import Header from './components/header/header';
-import ProductModal from './components/productModal/product';
 import PromoBlock from './components/promo-block/promo-block';
 import WorksSlider from './components/works/works';
 import SEO from './SEO';
+
+// Lazy load ProductModal for better performance
+const ProductModal = lazy(() => import('./components/productModal/product'));
 
 // Creating styled components
 const AppContainer = styled.div`
@@ -179,10 +181,12 @@ function App({ initialCatalogData = [] }: AppProps) {
 
       <PromoBlock slides={slides} buttonText="К каталогу" onButtonClick={scrollToCatalog} />
       <Catalog initialData={initialCatalogData}></Catalog>
-      {/* <WorkSlider works={completedWorks} /> */}
-
       <WorksSlider works={completedWorks} onWorkClick={handleWorkClick} />
-      {isModalOpen && selectedWork && <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} product={selectedWork} />}
+      {isModalOpen && selectedWork && (
+        <Suspense fallback={null}>
+          <ProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} product={selectedWork} />
+        </Suspense>
+      )}
       <AboutCompany />
       <FeedbackForm telegramBotToken="7694051593:AAGBls3mX5vQwvn4s95-gdOZHD9_96aNC7U"></FeedbackForm>
 

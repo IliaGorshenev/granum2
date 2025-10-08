@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 import * as XLSX from 'xlsx';
 import Loader from './loader/loader';
@@ -431,6 +432,26 @@ const CardButton = styled.button`
   }
 `;
 
+const modalFadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const modalSlideUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+`;
+
 // Modal styled components
 const ModalOverlay = styled.div`
   position: fixed;
@@ -438,141 +459,178 @@ const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
-  animation: fadeIn 0.4s ease;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  animation: ${modalFadeIn} 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 5px;
   }
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  border-radius: 20px;
-  max-width: 1250px;
-  width: 92%;
-  max-height: 92vh;
+  background: linear-gradient(to bottom, #ffffff, #fafafa);
+  border-radius: 24px;
+  max-width: 1300px;
+  width: 100%;
+  max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-  animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: ${modalSlideUp} 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  &::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    margin: 12px 0;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #c5c5c5;
-    border-radius: 10px;
+    background: linear-gradient(to bottom, #c5c5c5, #a8a8a8);
+    border-radius: 12px;
+    border: 3px solid #f5f5f5;
+
+    &:hover {
+      background: linear-gradient(to bottom, #a8a8a8, #909090);
+    }
   }
 
-  &::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+  @media (max-width: 1024px) {
+    max-width: 95%;
+    border-radius: 20px;
   }
 
   @media (max-width: 768px) {
-    width: 95%;
-    max-height: 95vh;
+    max-width: 98%;
+    max-height: 94vh;
+    border-radius: 16px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
   }
 
   @media (max-width: 480px) {
-    width: 98%;
-    max-height: 98vh;
-    border-radius: 15px;
+    max-width: 100%;
+    max-height: 96vh;
+    border-radius: 12px;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
   }
 `;
 
 const ModalHeader = styled.div`
-  padding: 2rem 2.5rem;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 2.5rem 3rem;
+  border-bottom: 2px solid #f0f0f0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
-  background: white;
+  background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0.98));
+  backdrop-filter: blur(10px);
   z-index: 10;
-  border-radius: 20px 20px 0 0;
+  border-radius: 24px 24px 0 0;
+
+  @media (max-width: 1024px) {
+    padding: 2rem 2.5rem;
+    border-radius: 20px 20px 0 0;
+  }
 
   @media (max-width: 768px) {
-    padding: 1.5rem 2rem;
+    padding: 1.75rem 2rem;
+    border-radius: 16px 16px 0 0;
   }
 
   @media (max-width: 480px) {
-    padding: 1rem 1.5rem;
-    border-radius: 15px 15px 0 0;
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px 12px 0 0;
   }
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 2rem;
-  color: #2d3748;
+  font-size: 2.25rem;
+  color: #1a202c;
   margin: 0;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-weight: 700;
+  letter-spacing: -0.75px;
+  background: linear-gradient(135deg, #2d3748, #4a5568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (max-width: 1024px) {
+    font-size: 2rem;
+  }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.3px;
   }
 `;
 
 const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  font-size: 2.25rem;
   cursor: pointer;
-  color: #718096;
-  width: 45px;
-  height: 45px;
+  color: #4a5568;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 300;
 
   &:hover {
-    color: #2d3748;
-    background-color: #f7fafc;
+    color: #1a202c;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: rotate(90deg) scale(1.05);
+  }
+
+  &:active {
+    transform: rotate(90deg) scale(0.95);
+  }
+
+  @media (max-width: 1024px) {
+    width: 46px;
+    height: 46px;
+    font-size: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 42px;
+    height: 42px;
+    font-size: 1.85rem;
   }
 
   @media (max-width: 480px) {
-    width: 40px;
-    height: 40px;
-    font-size: 1.8rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.7rem;
   }
 `;
 
@@ -958,78 +1016,85 @@ const Catalog: React.FC<CatalogProps> = ({ initialData = [] }) => {
       }
     }, [selectedItem]);
 
-  return (
+  const renderModal = () => {
+    if (!selectedItem) return null;
 
-    <CatalogContainer>
-      <CatalogTitle id="catalog">Каталог гранитных плит</CatalogTitle>
-      <CatalogGrid>
-        {catalogData.map((item, index) => (
-          <AnimatedCard key={item.id} onClick={() => openModal(item)} delay={index * 0.1}>
-            <CardImage bgImage={item.image} />
-            <CardContent>
-              <CardTitle>{item.name}</CardTitle>
-              <CardOrigin>Происхождение: {item.origin}</CardOrigin>
-              <CardColor>
-                <ColorLabel>Цвет:</ColorLabel>
-                <ColorCircle color={item.color} />
-              </CardColor>
-              <StyledButton>
-                <ButtonImage src="https://storage.yandexcloud.net/ilia/2025-03-17%2015.36.35%20(2)%20(2).png" alt="Button icon" />
-                Подробнее
-              </StyledButton>
-            </CardContent>
-          </AnimatedCard>
-        ))}
-      </CatalogGrid>
-
-      {selectedItem && (
-        <ModalOverlay onClick={closeModal}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
-            <ModalHeader>
-              <ModalTitle>{selectedItem.name}</ModalTitle>
-              <CloseButton onClick={closeModal}>&times;</CloseButton>
-            </ModalHeader>
-            <ModalBody>
-              <ModalContentLayout>
-                <ModalImage src={selectedItem.image} alt={selectedItem.name} />
-                <ModalDescription>{selectedItem.description}</ModalDescription>
-              </ModalContentLayout>
-              <ModalInfo>
-                <InfoItem>
-                  <InfoLabel>Происхождение:</InfoLabel>
-                  <InfoValue>{selectedItem.origin}</InfoValue>
-                </InfoItem>
-                <InfoItem>
-                  <InfoLabel>Цвет:</InfoLabel>
-                  <InfoValue>
-                    {selectedItem.color} <ColorCircle color={selectedItem.color} />
-                  </InfoValue>
-                </InfoItem>
-              </ModalInfo>
-              <h3 id="price-table-heading">Цены</h3>
-              <PriceTable>
-                <thead>
-                  <tr>
-                    <TableHeader>Размер</TableHeader>
-                    <TableHeader>Термо</TableHeader>
-                    <TableHeader>Полировка</TableHeader>
+    return createPortal(
+      <ModalOverlay onClick={closeModal}>
+        <ModalContent onClick={(e) => e.stopPropagation()}>
+          <ModalHeader>
+            <ModalTitle>{selectedItem.name}</ModalTitle>
+            <CloseButton onClick={closeModal}>&times;</CloseButton>
+          </ModalHeader>
+          <ModalBody>
+            <ModalContentLayout>
+              <ModalImage src={selectedItem.image} alt={selectedItem.name} />
+              <ModalDescription>{selectedItem.description}</ModalDescription>
+            </ModalContentLayout>
+            <ModalInfo>
+              <InfoItem>
+                <InfoLabel>Происхождение:</InfoLabel>
+                <InfoValue>{selectedItem.origin}</InfoValue>
+              </InfoItem>
+              <InfoItem>
+                <InfoLabel>Цвет:</InfoLabel>
+                <InfoValue>
+                  {selectedItem.color} <ColorCircle color={selectedItem.color} />
+                </InfoValue>
+              </InfoItem>
+            </ModalInfo>
+            <h3 id="price-table-heading">Цены</h3>
+            <PriceTable>
+              <thead>
+                <tr>
+                  <TableHeader>Размер</TableHeader>
+                  <TableHeader>Термо</TableHeader>
+                  <TableHeader>Полировка</TableHeader>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedItem.prices.map((price, index) => (
+                  <tr key={index}>
+                    <TableCell>{price.size}</TableCell>
+                    <TableCell>{price.price}</TableCell>
+                    <TableCell>{price.additional}</TableCell>
                   </tr>
-                </thead>
-                <tbody>
-                  {selectedItem.prices.map((price, index) => (
-                    <tr key={index}>
-                      <TableCell>{price.size}</TableCell>
-                      <TableCell>{price.price}</TableCell>
-                      <TableCell>{price.additional}</TableCell>
-                    </tr>
-                  ))}
-                </tbody>
-              </PriceTable>
-            </ModalBody>
-          </ModalContent>
-        </ModalOverlay>
-      )}
-    </CatalogContainer>
+                ))}
+              </tbody>
+            </PriceTable>
+          </ModalBody>
+        </ModalContent>
+      </ModalOverlay>,
+      document.body
+    );
+  };
+
+  return (
+    <>
+      <CatalogContainer>
+        <CatalogTitle id="catalog">Каталог гранитных плит</CatalogTitle>
+        <CatalogGrid>
+          {catalogData.map((item, index) => (
+            <AnimatedCard key={item.id} onClick={() => openModal(item)} delay={index * 0.1}>
+              <CardImage bgImage={item.image} />
+              <CardContent>
+                <CardTitle>{item.name}</CardTitle>
+                <CardOrigin>Происхождение: {item.origin}</CardOrigin>
+                <CardColor>
+                  <ColorLabel>Цвет:</ColorLabel>
+                  <ColorCircle color={item.color} />
+                </CardColor>
+                <StyledButton>
+                  <ButtonImage src="https://storage.yandexcloud.net/ilia/2025-03-17%2015.36.35%20(2)%20(2).png" alt="Button icon" />
+                  Подробнее
+                </StyledButton>
+              </CardContent>
+            </AnimatedCard>
+          ))}
+        </CatalogGrid>
+      </CatalogContainer>
+      {renderModal()}
+    </>
   );
 };
 

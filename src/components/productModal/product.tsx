@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { createPortal } from 'react-dom';
+import styled, { keyframes } from 'styled-components';
 import { LeftArrowIcon, RightArrowIcon } from '../icons/slider-buttons';
 
 interface ProductModalProps {
@@ -14,76 +15,109 @@ interface ProductModalProps {
   };
 }
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const scaleIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease;
+  z-index: 9999;
+  animation: ${fadeIn} 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  @media (max-width: 768px) {
+    padding: 0;
   }
 `;
 
 const ModalContent = styled.div`
-  background-color: black;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
   width: 100%;
   height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
-  animation: fadeIn 0.4s ease;
+  animation: ${scaleIn} 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  @media (max-width: 768px) {
+    border-radius: 0;
+    max-height: 100vh;
+    height: 100%;
   }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.6);
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  font-size: 24px;
+  font-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg) scale(1.1);
+  }
+
+  &:active {
+    transform: rotate(90deg) scale(0.95);
   }
 
   @media (max-width: 768px) {
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+  }
+
+  @media (max-width: 480px) {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
   }
 `;
 
@@ -93,120 +127,211 @@ const MainImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 20px;
+  padding: 60px 40px 20px;
   position: relative;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
+
+  @media (max-width: 1024px) {
+    padding: 50px 30px 15px;
+  }
 
   @media (max-width: 768px) {
-    padding: 10px;
+    padding: 50px 20px 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 45px 15px 10px;
   }
 `;
 
 const MainImage = styled.img`
   max-width: 100%;
-  max-height: 85vh;
+  max-height: 82vh;
   object-fit: contain;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 1024px) {
+    max-height: 75vh;
+  }
 
   @media (max-width: 768px) {
-    max-height: 75vh;
+    max-height: 70vh;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 65vh;
+    border-radius: 4px;
   }
 `;
 
 const ThumbnailsContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+  backdrop-filter: blur(10px);
   overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   &::-webkit-scrollbar {
-    height: 6px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #333;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #666;
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
   }
 
   @media (max-width: 768px) {
-    padding: 10px 5px;
-    gap: 6px;
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 8px;
+    gap: 8px;
   }
 `;
 
 const ThumbnailImage = styled.img<{ isSelected: boolean }>`
-  width: 80px;
-  height: 60px;
+  width: 100px;
+  height: 75px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: ${(props) => (props.isSelected ? '3px solid #3b7a57' : '3px solid transparent')};
-  opacity: ${(props) => (props.isSelected ? 1 : 0.7)};
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: ${(props) => (props.isSelected ? '3px solid #3b7a57' : '3px solid rgba(255, 255, 255, 0.2)')};
+  opacity: ${(props) => (props.isSelected ? 1 : 0.6)};
+  box-shadow: ${(props) => (props.isSelected ? '0 8px 16px rgba(59, 122, 87, 0.4)' : '0 4px 8px rgba(0, 0, 0, 0.3)')};
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
     opacity: 1;
+    border-color: #3b7a57;
+  }
+
+  &:active {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  @media (max-width: 1024px) {
+    width: 85px;
+    height: 64px;
   }
 
   @media (max-width: 768px) {
-    width: 60px;
-    height: 45px;
+    width: 70px;
+    height: 53px;
     border-width: 2px;
+    border-radius: 6px;
 
     &:hover {
-      transform: translateY(-3px);
+      transform: translateY(-3px) scale(1.05);
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 45px;
+    border-radius: 4px;
+
+    &:hover {
+      transform: translateY(-2px) scale(1.03);
     }
   }
 `;
 
 const ProductTitle = styled.h2`
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 24px;
+  left: 24px;
   color: white;
-  font-size: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 8px 15px;
-  border-radius: 4px;
-  max-width: 70%;
+  font-size: 1.75rem;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 12px;
+  max-width: 65%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 5;
 
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    top: 10px;
-    left: 10px;
-    padding: 6px 10px;
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+    padding: 10px 18px;
     max-width: 60%;
   }
 
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    max-width: 55%;
+    border-radius: 8px;
+  }
+
   @media (max-width: 480px) {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    top: 12px;
+    left: 12px;
+    padding: 6px 12px;
     max-width: 50%;
+    border-radius: 6px;
   }
 `;
 
-// Add this after the ProductTitle styled component
 const NavigationArrow = styled.div`
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  @media (max-width: 1024px) {
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
   @media (max-width: 768px) {
     svg {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
     }
   }
 
   @media (max-width: 480px) {
     svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
   }
 `;
@@ -266,9 +391,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
     }
   };
 
-  return (
+  if (!isOpen) return null;
+
+  return createPortal(
     <ModalOverlay onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
+        <ProductTitle>{product.title}</ProductTitle>
         <CloseButton onClick={onClose}>×</CloseButton>
 
         <MainImageContainer>
@@ -303,7 +431,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ isOpen, onClose, product })
           </ThumbnailsContainer>
         )}
       </ModalContent>
-    </ModalOverlay>
+    </ModalOverlay>,
+    document.body
   );
 };
 

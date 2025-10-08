@@ -4,17 +4,17 @@ import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { LeftArrowIcon, RightArrowIcon } from '../icons/slider-buttons';
-import { 
-  SlideContent, 
-  SlideDescription, 
-  SlideImage, 
-  SlideOverlay, 
-  SliderContainer, 
-  SliderHeader, 
-  SliderTitle, 
-  SlideTitle, 
+import {
+  NavigationContainer,
+  SlideContent,
+  SlideDescription,
+  SlideImage,
+  SlideOverlay,
+  SliderContainer,
+  SliderHeader,
+  SliderTitle,
+  SlideTitle,
   SwiperWrapper,
-  NavigationContainer
 } from './styles';
 
 interface WorkItem {
@@ -77,7 +77,14 @@ const WorksSlider: React.FC<WorksSliderProps> = ({ works, onWorkClick }) => {
           }}>
           {works.map((work) => (
             <SwiperSlide key={work.id}>
-              <div onClick={() => onWorkClick(work)} style={{ cursor: 'pointer', position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
+              <div
+                onClick={() => onWorkClick(work)}
+                style={{
+                  cursor: 'pointer',
+                  position: 'relative',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                }}>
                 <SlideImage src={work.imageSrc} alt={work.title} />
                 <SlideOverlay />
                 <SlideContent>
@@ -88,7 +95,7 @@ const WorksSlider: React.FC<WorksSliderProps> = ({ works, onWorkClick }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-        
+
         <NavigationContainer>
           <LeftArrowIcon onClick={handlePrev} position="left" />
           <RightArrowIcon onClick={handleNext} position="right" />
