@@ -1,17 +1,18 @@
 /** @type {import('next').NextConfig} */
+const ISR_CACHE_SIZE_BYTES = 50 * 1024 * 1024
+
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  // Enable static exports
   output: 'standalone',
-  // Configure image domains if you're using next/image
+  cacheMaxMemorySize: ISR_CACHE_SIZE_BYTES,
+  pageExtensions: ['route.ts', 'route.tsx'],
   images: {
-    domains: ['storage.yandexcloud.net', 'granum-stone.s3.regru.cloud'],
-  },
-  // Ensure ISR works properly
-  experimental: {
-    // This helps with ISR in some deployment environments
-    isrMemoryCacheSize: 50,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.yandexcloud.net',
+      },
+    ],
   },
 }
 

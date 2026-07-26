@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--background);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 20rem;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family:
+      'Manrope Variable',
+      'Manrope',
+      -apple-system,
+      BlinkMacSystemFont,
+      'SF Pro Text',
+      'SF Pro Display',
+      sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 22%, transparent);
+  }
+}
+
+:root,
+[data-theme='light'] {
+  --accent: #245c46;
+  --accent-foreground: #ffffff;
+  --background: #f6f5ef;
+  --foreground: #17241e;
+  --surface: #fffefa;
+  --surface-secondary: #eeeee7;
+  --surface-tertiary: #e5e7df;
+  --muted: #69736d;
+  --default: #e8ece7;
+  --default-foreground: #26352e;
+  --field-background: #fffefa;
+  --field-border: #d6ddd7;
+  --field-border-width: 1px;
+  --border: #dce1dc;
+  --separator: #e5e8e3;
+  --footer: #13221b;
+  --focus: #245c46;
+  --radius: 1rem;
+  --field-radius: 0.875rem;
+  --cursor-interactive: pointer;
+  --surface-shadow:
+    0 1px 2px rgb(23 36 30 / 4%),
+    0 12px 32px rgb(23 36 30 / 6%);
+  --overlay-shadow:
+    0 2px 8px rgb(23 36 30 / 8%),
+    0 24px 64px rgb(23 36 30 / 14%);
+}
+
+@keyframes promo-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes promo-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-promo-fade-in {
+  animation: promo-fade-in 1s forwards;
+}
+
+.animate-promo-fade-in-up {
+  animation: promo-fade-in-up 0.8s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
