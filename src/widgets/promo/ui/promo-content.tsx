@@ -66,9 +66,9 @@ export const PromoContent = ({
       </p>
     </div>
     <div key={`button-${currentIndex}`}>
-      <div className="flex flex-col justify-center gap-3 sm:flex-row">
+      <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Button
-          className="max-w-full min-w-0 px-3 text-sm font-bold sm:px-5"
+          className="w-full max-w-xs min-w-0 justify-center px-3 text-sm font-bold sm:w-auto sm:px-5"
           onPress={() => {
             trackGoal(Goals.QUOTE_CTA_CLICKED);
             scrollToSection(primaryHref);
@@ -85,7 +85,7 @@ export const PromoContent = ({
           <span>Рассчитать стоимость</span>
         </Button>
         <Button
-          className="max-w-full min-w-0 border-white/30 px-3 text-sm font-bold text-white sm:px-5"
+          className="w-full max-w-xs min-w-0 justify-center border-white/30 px-3 text-sm font-bold text-white sm:w-auto sm:px-5"
           onPress={() => {
             trackGoal(Goals.CATALOG_CTA_CLICKED);
             scrollToSection(secondaryHref);

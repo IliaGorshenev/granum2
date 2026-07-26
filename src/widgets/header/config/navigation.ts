@@ -1,12 +1,11 @@
 import { HOME_SECTION_IDS, ROUTES } from '@/shared/config';
+import { mediaUrl } from '@/shared/config';
 
 export const HEADER_SCROLL_THRESHOLD_PX = 50;
 
 export const HEADER_LOGOS = {
-  default:
-    'https://storage.yandexcloud.net/ilia/2025-03-17%2015.36.35%20(2)%20(2).png',
-  scrolled:
-    'https://storage.yandexcloud.net/ilia/2025-03-17%2015.36.35%20(2)%20(3).png',
+  default: mediaUrl('brand/logo-overlay.png'),
+  scrolled: mediaUrl('brand/logo-default.png'),
 } as const;
 
 export type HeaderNavigationItem =

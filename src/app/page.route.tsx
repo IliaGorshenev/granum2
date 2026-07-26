@@ -1,12 +1,8 @@
-import {
-  fetchCatalog,
-} from '@/entities/catalog-item';
+import { catalog } from '@/entities/catalog-item';
 import { HomePage } from '@/pages/home';
 
-export const revalidate = 3600;
-
-const HomeRoute = async () => (
-  <HomePage initialCatalogData={await fetchCatalog()} />
+const HomeRoute = () => (
+  <HomePage initialCatalogData={catalog} />
 );
 
 export default HomeRoute;

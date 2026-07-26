@@ -53,13 +53,6 @@ export const viewport: Viewport = {
 
 const RootLayout = ({ children }: PropsWithChildren) => (
   <html className="light" data-theme="light" lang="ru">
-    <head>
-      <link
-        crossOrigin="anonymous"
-        href="https://storage.yandexcloud.net"
-        rel="preconnect"
-      />
-    </head>
     <body>
       <script
         dangerouslySetInnerHTML={{

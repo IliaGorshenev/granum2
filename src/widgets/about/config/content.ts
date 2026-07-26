@@ -1,10 +1,9 @@
+import { mediaUrl } from '@/shared/config';
+
 export const ABOUT_IMAGES = {
-  history:
-    'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg',
-  production:
-    'https://storage.yandexcloud.net/ilia/Lez-4599-1-1536x1024.jpg',
-  projects:
-    'https://storage.yandexcloud.net/ilia/%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B/%D0%B2%D1%85%D0%BE%D0%B43.jpg',
+  history: mediaUrl('home/production.jpg'),
+  production: mediaUrl('home/workshop.jpg'),
+  projects: mediaUrl('works/entrance-3.jpg'),
 } as const;
 
 export const ABOUT_EQUIPMENT = [

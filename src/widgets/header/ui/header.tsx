@@ -73,14 +73,23 @@ const Header = ({
           <Button
             aria-expanded={header.mobileMenu.isOpen}
             aria-label="Открыть меню"
-            className={`hidden max-lg:flex ${
-              header.isOverlay ? 'text-white' : 'text-foreground'
+            className={`hidden [--button-bg:transparent] max-lg:flex ${
+              header.isOverlay
+                ? '[--button-bg-hover:rgb(0_0_0_/_0.28)] [--button-bg-pressed:rgb(0_0_0_/_0.38)] [--button-fg:white]'
+                : '[--button-bg-hover:var(--default)] [--button-bg-pressed:var(--default)] [--button-fg:var(--foreground)]'
             }`}
             isIconOnly
             onPress={header.mobileMenu.open}
             size="sm"
             variant="ghost">
-            ☰
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
+              <path
+                d="M5 8H19M5 12H19M5 16H19"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="2"
+              />
+            </svg>
           </Button>
         </Surface>
       </header>

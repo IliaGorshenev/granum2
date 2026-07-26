@@ -1,5 +1,6 @@
 import { SITE_URL } from './site';
 import { COMPANY_CONTACTS } from './company';
+import { mediaUrl } from './media';
 
 export const DEFAULT_SEO = {
   title:
@@ -8,7 +9,7 @@ export const DEFAULT_SEO = {
     'Производство и продажа изделий из гранита и мрамора. Столешницы, ступени, подоконники и облицовка от производителя.',
   keywords:
     'гранит, мрамор, натуральный камень, изделия из камня, Гранум Челябинск',
-  image: 'https://storage.yandexcloud.net/ilia/IMG_5153-min.jpg',
+  image: mediaUrl('home/production.jpg'),
   canonicalUrl: SITE_URL,
 } as const;
 

@@ -25,7 +25,7 @@ export const MobileNavigation = ({
       className="w-[min(88vw,22rem)]"
       placement="right">
       <Drawer.Dialog>
-        <Drawer.Header className="flex items-center justify-between border-b border-separator">
+        <Drawer.Header className="flex-row items-center justify-between border-b border-separator">
           <Drawer.Heading className="text-lg font-semibold">
             Меню
           </Drawer.Heading>
@@ -35,7 +35,17 @@ export const MobileNavigation = ({
             onPress={onClose}
             size="sm"
             variant="ghost">
-            ✕
+            <svg
+              aria-hidden="true"
+              fill="none"
+              viewBox="0 0 24 24">
+              <path
+                d="M7 7L17 17M17 7L7 17"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="2"
+              />
+            </svg>
           </Button>
         </Drawer.Header>
         <Drawer.Body>
