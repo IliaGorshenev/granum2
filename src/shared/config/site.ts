@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://granum-stone.com';
+export const SITE_URL = 'https://granum-stone.ru';
 
 export const ROUTES = {
   home: '/',

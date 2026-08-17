@@ -1,5 +1,8 @@
-import { HOME_SECTION_IDS, ROUTES } from '@/shared/config';
-import { mediaUrl } from '@/shared/config';
+import {
+  HOME_SECTION_IDS,
+  mediaUrl,
+  ROUTES,
+} from '@/shared/config';
 
 export const HEADER_SCROLL_THRESHOLD_PX = 50;
 

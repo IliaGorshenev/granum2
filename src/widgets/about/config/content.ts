@@ -2,7 +2,7 @@ import { mediaUrl } from '@/shared/config';
 
 export const ABOUT_IMAGES = {
   history: mediaUrl('home/production.jpg'),
-  production: mediaUrl('home/workshop.jpg'),
+  production: mediaUrl('generated/stone-workshop.png'),
   projects: mediaUrl('works/entrance-3.jpg'),
 } as const;
 
@@ -27,12 +27,15 @@ export const ABOUT_MATERIALS = [
 export const ABOUT_HIGHLIGHTS = {
   production: {
     eyebrow: 'Собственный цех',
+    icon: 'workshop',
+    imageNote: 'Иллюстрация производственного процесса',
     title: 'Своё производство',
     description:
       'Контролируем качество на всех этапах — от выбора камня до готового изделия.',
   },
   masters: {
     eyebrow: 'Команда',
+    icon: 'experience',
     metric: '10+',
     metricLabel: 'лет работаем с натуральным камнем',
     title: 'Опытные мастера',
@@ -41,11 +44,13 @@ export const ABOUT_HIGHLIGHTS = {
   },
   personal: {
     eyebrow: 'Индивидуально',
+    icon: 'project',
     title: 'Индивидуальный подход',
     description: 'Создаём решения под ваши задачи, учитывая все пожелания.',
   },
   support: {
     eyebrow: 'Полный цикл',
+    icon: 'installation',
     title: 'Сопровождение проекта',
     description:
       'Помогаем на всех этапах: от консультации и выбора материала до замеров, изготовления и монтажа.',
@@ -53,6 +58,7 @@ export const ABOUT_HIGHLIGHTS = {
   },
   warranty: {
     eyebrow: 'Ответственность',
+    icon: 'warranty',
     metric: 'Гарантия',
     metricLabel: 'на выполненные работы',
     title: 'Отвечаем за результат',
@@ -60,6 +66,7 @@ export const ABOUT_HIGHLIGHTS = {
   },
   estimate: {
     eyebrow: 'Смета',
+    icon: 'dimensions',
     title: 'Прозрачный расчёт',
     description:
       'Показываем, как материал, размеры и обработка влияют на стоимость.',

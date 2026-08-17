@@ -1,1 +1,0 @@
-export const GALLERY_SWIPE_DISTANCE_PX = 56;

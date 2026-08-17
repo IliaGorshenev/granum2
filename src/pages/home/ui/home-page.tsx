@@ -5,7 +5,6 @@ import { HOME_SECTION_IDS } from '@/shared/config';
 import { AboutCompany } from '@/widgets/about';
 import { Catalog } from '@/widgets/catalog';
 import { Contact } from '@/widgets/contact';
-import { Faq } from '@/widgets/faq';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 import { Process } from '@/widgets/process';
@@ -17,6 +16,7 @@ import {
   COMPLETED_WORKS,
   PROMO_SLIDES,
 } from '../config/content';
+import { CompanyInformation } from './company-information';
 
 interface HomePageProps {
   initialCatalogData: CatalogItem[];
@@ -36,7 +36,7 @@ const HomePage = ({ initialCatalogData }: HomePageProps) => {
       <Process />
       <Works works={COMPLETED_WORKS} />
       <AboutCompany />
-      <Faq />
+      <CompanyInformation />
       <Contact />
       <Footer />
     </Surface>

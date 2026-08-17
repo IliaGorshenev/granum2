@@ -5,7 +5,7 @@ import {
   CatalogColorSwatch,
   type CatalogItem,
 } from '@/entities/catalog-item';
-import { ACTION_BUTTON_ICON_URL } from '@/shared/config';
+import { StoneIcon } from '@/shared/ui/stone-icon';
 
 interface CatalogCardProps {
   item: CatalogItem;
@@ -63,12 +63,11 @@ export const CatalogCard = ({
         onPress={() => onSelect(item)}
         size="sm"
         variant="primary">
-        <Image
-          alt=""
-          className="size-4 shrink-0"
-          height={16}
-          src={ACTION_BUTTON_ICON_URL}
-          width={16}
+        <StoneIcon
+          name="stone"
+          size="sm"
+          tone="inverse"
+          variant="plain"
         />
         <span className="truncate">Подробнее</span>
       </Button>

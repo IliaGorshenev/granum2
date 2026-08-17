@@ -59,17 +59,22 @@ const WorkGalleryModal = ({
             </Modal.Header>
             <Modal.Body className="m-0 flex min-w-0 flex-col overflow-hidden p-0 text-white">
               <GalleryStage
-                alt={`${product.title}. Фото ${gallery.currentIndex + 1}`}
+                currentIndex={gallery.currentIndex}
                 hasNavigation={gallery.hasMultipleImages}
-                image={gallery.selectedImage}
+                images={gallery.images}
                 onNext={gallery.nextImage}
                 onPrevious={gallery.previousImage}
+                onSelect={gallery.syncImage}
+                onSwiper={gallery.setSwiper}
+                thumbsSwiper={gallery.thumbsSwiper}
+                title={product.title}
               />
               {gallery.hasMultipleImages && (
                 <GalleryThumbnails
                   currentIndex={gallery.currentIndex}
                   images={gallery.images}
                   onSelect={gallery.selectImage}
+                  onSwiper={gallery.setThumbsSwiper}
                 />
               )}
             </Modal.Body>

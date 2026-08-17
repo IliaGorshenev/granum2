@@ -17,7 +17,6 @@ import {
   showNextWorksSlideAtom,
   showPreviousWorksSlideAtom,
   showWorksSlideAtom,
-  toggleWorksAutoplayAtom,
   worksAutoplayPausedAtom,
   worksSlideIndexAtom,
   worksSwiperAtom,
@@ -38,7 +37,6 @@ export const useWorksSlider = () => {
   const showSlide = useSetAtom(showWorksSlideAtom);
   const nextSlide = useSetAtom(showNextWorksSlideAtom);
   const previousSlide = useSetAtom(showPreviousWorksSlideAtom);
-  const toggleAutoplay = useSetAtom(toggleWorksAutoplayAtom);
   const resetSlider = useSetAtom(resetWorksSliderAtom);
 
   useEffect(() => {
@@ -84,6 +82,5 @@ export const useWorksSlider = () => {
     selectWork: (work: Work) => selectWork(work),
     setSwiper,
     showSlide,
-    toggleAutoplay,
   };
 };

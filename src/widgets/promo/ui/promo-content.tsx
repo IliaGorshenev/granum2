@@ -5,14 +5,13 @@ import {
   Chip,
   Surface,
 } from '@heroui/react';
-import Image from 'next/image';
 
 import type { PromoSlide } from '@/entities/promo';
-import { ACTION_BUTTON_ICON_URL } from '@/shared/config';
 import {
   Goals,
   trackGoal,
 } from '@/shared/lib/analytics';
+import { StoneIcon } from '@/shared/ui/stone-icon';
 
 import { PROMO_TEXT_ANIMATION_DELAYS } from '../config/promo';
 
@@ -75,12 +74,12 @@ export const PromoContent = ({
           }}
           size="md"
           variant="primary">
-          <Image
-            alt=""
-            className="size-5 shrink-0 object-contain max-sm:hidden"
-            height={20}
-            src={ACTION_BUTTON_ICON_URL}
-            width={20}
+          <StoneIcon
+            className="max-sm:hidden"
+            name="measure"
+            size="sm"
+            tone="inverse"
+            variant="plain"
           />
           <span>Рассчитать стоимость</span>
         </Button>

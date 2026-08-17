@@ -9,6 +9,8 @@ import type { FormEvent } from 'react';
 import Link from 'next/link';
 
 import { ROUTES } from '@/shared/config';
+import { StoneIcon } from '@/shared/ui/stone-icon';
+
 import { useFeedbackForm } from '../model/use-feedback-form';
 import { FeedbackFields } from './feedback-fields';
 import { FeedbackStatus } from './feedback-status';
@@ -30,16 +32,19 @@ export const FeedbackForm = () => {
   return (
     <Card className="z-10 h-fit min-w-0 border border-border/80 p-1 shadow-xl">
       <Card.Header className="min-w-0 items-start px-5 pt-6 pb-2 sm:px-6">
-        <div className="min-w-0">
-          <p className="mb-2 text-xs font-bold tracking-[0.16em] text-accent uppercase">
-            Заявка на расчёт
-          </p>
-          <Card.Title className="text-2xl font-semibold tracking-[-0.035em]">
-            Получите предварительный расчёт
-          </Card.Title>
-          <Card.Description className="mt-2 text-sm leading-6">
-            Уточним детали и свяжемся в рабочее время.
-          </Card.Description>
+        <div className="flex min-w-0 items-start gap-4">
+          <StoneIcon name="measure" />
+          <div className="min-w-0">
+            <p className="mb-2 text-xs font-bold tracking-[0.16em] text-accent uppercase">
+              Заявка на расчёт
+            </p>
+            <Card.Title className="text-2xl font-semibold tracking-[-0.035em]">
+              Получите предварительный расчёт
+            </Card.Title>
+            <Card.Description className="mt-2 text-sm leading-6">
+              Уточним детали и свяжемся в рабочее время.
+            </Card.Description>
+          </div>
         </div>
       </Card.Header>
       <Card.Content className="min-w-0 px-5 py-4 sm:px-6">
@@ -52,6 +57,9 @@ export const FeedbackForm = () => {
             size="sm"
             type="submit"
             variant="primary">
+            {!isSubmitting && (
+              <StoneIcon name="project" size="sm" tone="inverse" />
+            )}
             {isSubmitting ? 'Отправка...' : 'Получить расчёт'}
           </Button>
           {status && <FeedbackStatus value={status} />}

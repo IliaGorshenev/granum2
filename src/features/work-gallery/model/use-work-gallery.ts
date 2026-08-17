@@ -8,47 +8,45 @@ import type { Work } from '@/entities/work';
 
 import {
   galleryImageIndexAtom,
+  galleryThumbsSwiperAtom,
   nextGalleryImageAtom,
   previousGalleryImageAtom,
+  resetWorkGalleryAtom,
   selectGalleryImageAtom,
+  setGallerySwiperAtom,
+  setGalleryThumbsSwiperAtom,
+  syncGalleryImageAtom,
 } from './work-gallery.atoms';
 
 export const useWorkGallery = (product: Work) => {
   const currentIndex = useAtomValue(galleryImageIndexAtom);
+  const thumbsSwiper = useAtomValue(galleryThumbsSwiperAtom);
   const selectImage = useSetAtom(selectGalleryImageAtom);
   const nextImage = useSetAtom(nextGalleryImageAtom);
   const previousImage = useSetAtom(previousGalleryImageAtom);
+  const resetGallery = useSetAtom(resetWorkGalleryAtom);
+  const setSwiper = useSetAtom(setGallerySwiperAtom);
+  const setThumbsSwiper = useSetAtom(
+    setGalleryThumbsSwiperAtom
+  );
+  const syncImage = useSetAtom(syncGalleryImageAtom);
   const images = useMemo(
     () => [product.imageSrc, ...(product.additionalImages ?? [])],
     [product.additionalImages, product.imageSrc]
   );
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') {
-        nextImage(images.length);
-      }
-
-      if (event.key === 'ArrowLeft') {
-        previousImage(images.length);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      selectImage(0);
-    };
-  }, [images.length, nextImage, previousImage, selectImage]);
+  useEffect(() => () => resetGallery(), [resetGallery]);
 
   return {
     currentIndex,
     hasMultipleImages: images.length > 1,
     images,
-    nextImage: () => nextImage(images.length),
-    previousImage: () => previousImage(images.length),
-    selectedImage: images[currentIndex],
+    nextImage,
+    previousImage,
     selectImage,
+    setSwiper,
+    setThumbsSwiper,
+    syncImage,
+    thumbsSwiper,
   };
 };

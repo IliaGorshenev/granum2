@@ -3,7 +3,7 @@ import { AboutFeatureCard } from './about-feature-card';
 import { AboutProductionCard } from './about-production-card';
 
 export const AboutHighlights = () => (
-  <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:auto-rows-[15rem] lg:grid-cols-12">
+  <div className="grid min-w-0 grid-cols-1 gap-x-4 gap-y-6 md:grid-cols-2 lg:auto-rows-[20rem] lg:grid-cols-12 lg:gap-6">
     <AboutProductionCard />
     <AboutFeatureCard
       {...ABOUT_HIGHLIGHTS.support}

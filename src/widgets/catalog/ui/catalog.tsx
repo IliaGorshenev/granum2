@@ -17,6 +17,7 @@ interface CatalogProps {
 const Catalog = ({ initialData }: CatalogProps) => {
   const {
     closeItem,
+    requestQuote,
     selectedItem,
     selectItem,
   } = useCatalog();
@@ -31,6 +32,7 @@ const Catalog = ({ initialData }: CatalogProps) => {
           variant="transparent">
           <SectionHeading
             eyebrow="Коллекция"
+            icon="stone"
             title="Каталог гранитных плит"
           />
           <div className="grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
@@ -45,7 +47,11 @@ const Catalog = ({ initialData }: CatalogProps) => {
         </Surface>
       </section>
       {selectedItem && (
-        <CatalogItemDetails item={selectedItem} onClose={closeItem} />
+        <CatalogItemDetails
+          item={selectedItem}
+          onClose={closeItem}
+          onRequestQuote={requestQuote}
+        />
       )}
     </>
   );

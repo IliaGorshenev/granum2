@@ -13,6 +13,7 @@ import {
   trackExternalLink,
   trackGoal,
 } from '@/shared/lib/analytics';
+import { StoneIcon } from '@/shared/ui/stone-icon';
 
 import {
   CONTACT_MAP_EXTERNAL_URL,
@@ -63,9 +64,12 @@ export const ContactMap = () => {
     <Card className="relative min-h-[28rem] overflow-hidden border border-border/80 bg-surface-secondary p-1 shadow-lg lg:min-h-[36rem]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgb(42_111_76_/_16%),transparent_38%),radial-gradient(circle_at_80%_75%,rgb(199_163_92_/_18%),transparent_42%)]" />
       <Card.Content className="relative flex h-full flex-col justify-end px-6 py-7 sm:px-8 sm:py-9">
-        <Chip className="mb-5 w-fit" color="accent" variant="soft">
-          Производство Granum
-        </Chip>
+        <div className="mb-5 flex items-center gap-3">
+          <StoneIcon name="location" />
+          <Chip className="w-fit" color="accent" variant="soft">
+            Производство Granum
+          </Chip>
+        </div>
         <Card.Title className="max-w-lg text-2xl font-semibold tracking-[-0.035em] sm:text-3xl">
           Приезжайте посмотреть камень
         </Card.Title>

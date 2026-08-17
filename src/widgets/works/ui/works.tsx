@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Surface } from '@heroui/react';
+import { Surface } from '@heroui/react';
 import { lazy, Suspense } from 'react';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules';
@@ -35,7 +35,11 @@ const WorksSlider = ({ works }: WorksSliderProps) => {
       className="relative mx-auto w-full max-w-7xl overflow-hidden px-5 py-14 sm:px-6 sm:py-16"
       id={HOME_SECTION_IDS.works}
       variant="transparent">
-      <SectionHeading eyebrow="Портфолио" title="Наши работы" />
+      <SectionHeading
+        eyebrow="Портфолио"
+        icon="project"
+        title="Наши работы"
+      />
 
       <div className="relative mx-auto mt-10 px-1 sm:mt-12 sm:px-5">
         <Swiper
@@ -84,21 +88,6 @@ const WorksSlider = ({ works }: WorksSliderProps) => {
           onSelect={slider.showSlide}
           works={works}
         />
-        <div className="mt-4 flex justify-center">
-          <Button
-            aria-label={
-              slider.isAutoplayPaused
-                ? 'Возобновить смену проектов'
-                : 'Приостановить смену проектов'
-            }
-            onPress={slider.toggleAutoplay}
-            size="sm"
-            variant="ghost">
-            {slider.isAutoplayPaused
-              ? 'Возобновить'
-              : 'Приостановить'}
-          </Button>
-        </div>
       </div>
       {slider.selectedWork && (
         <Suspense fallback={<Loader text="Загружаем галерею" />}>

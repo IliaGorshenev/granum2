@@ -2,18 +2,19 @@ import { Modal } from '@heroui/react';
 
 import type { CatalogItem } from '@/entities/catalog-item';
 
-import { CatalogItemMeta } from './catalog-item-meta';
 import { CatalogItemSummary } from './catalog-item-summary';
 import { CatalogPriceTable } from './catalog-price-table';
 
 interface CatalogItemDetailsProps {
   item: CatalogItem;
   onClose: () => void;
+  onRequestQuote: () => void;
 }
 
 export const CatalogItemDetails = ({
   item,
   onClose,
+  onRequestQuote,
 }: CatalogItemDetailsProps) => (
   <Modal>
     <Modal.Backdrop
@@ -25,18 +26,21 @@ export const CatalogItemDetails = ({
       }}
       variant="blur">
       <Modal.Container
-        className="mx-3 max-w-[calc(100%_-_1.5rem)]"
+        className="w-full sm:p-6"
         placement="center"
         scroll="inside"
-        size="lg">
-        <Modal.Dialog className="min-w-0">
-          <Modal.CloseTrigger />
-          <Modal.Header>
+        size="full">
+        <Modal.Dialog className="min-w-0 overflow-hidden bg-surface p-0 sm:h-auto sm:min-h-0 sm:max-w-[80rem] sm:rounded-[2rem] sm:border sm:border-border/60 sm:shadow-2xl">
+          <Modal.CloseTrigger className="top-4 right-4 z-30 bg-surface/90 text-foreground shadow-lg ring-1 ring-border/80 backdrop-blur-md sm:top-5 sm:right-5" />
+          <Modal.Header className="sr-only">
             <Modal.Heading>{item.name}</Modal.Heading>
           </Modal.Header>
-          <Modal.Body className="min-w-0 gap-5">
-            <CatalogItemSummary item={item} />
-            <CatalogItemMeta item={item} />
+          <Modal.Body className="m-0 min-w-0 gap-0 p-0">
+            <CatalogItemSummary
+              item={item}
+              onClose={onClose}
+              onRequestQuote={onRequestQuote}
+            />
             <CatalogPriceTable item={item} />
           </Modal.Body>
         </Modal.Dialog>

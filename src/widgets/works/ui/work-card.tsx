@@ -6,6 +6,7 @@ import {
 import Image from 'next/image';
 
 import type { Work } from '@/entities/work';
+import { StoneIcon } from '@/shared/ui/stone-icon';
 
 interface WorkCardProps {
   onSelect: (work: Work) => void;
@@ -45,6 +46,7 @@ export const WorkCard = ({
         onPress={() => onSelect(work)}
         size="sm"
         variant="secondary">
+        <StoneIcon name="project" size="sm" variant="plain" />
         <span className="truncate">Открыть проект</span>
       </Button>
     </Card.Footer>

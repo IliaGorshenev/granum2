@@ -15,7 +15,7 @@ const getMediaRemotePatterns = () => {
       protocol: url.protocol.slice(0, -1),
       hostname: url.hostname,
       port: url.port,
-      pathname: `${url.pathname.replace(/\\/$/, '')}/**`,
+      pathname: `${url.pathname.replace(/\/$/, '')}/**`,
     },
   ]
 }

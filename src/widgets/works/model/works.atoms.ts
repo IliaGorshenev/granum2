@@ -24,10 +24,6 @@ export const setWorksAutoplayPausedAtom = atom(
     set(worksAutoplayPausedAtom, isPaused)
 );
 
-export const toggleWorksAutoplayAtom = atom(null, (get, set) =>
-  set(worksAutoplayPausedAtom, !get(worksAutoplayPausedAtom))
-);
-
 export const selectWorkAtom = atom(
   null,
   (_get, set, work: Work) => set(selectedWorkAtom, work)

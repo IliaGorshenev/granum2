@@ -3,6 +3,11 @@ import {
   Chip,
 } from '@heroui/react';
 
+import {
+  StoneIcon,
+  type StoneIconName,
+} from '@/shared/ui/stone-icon';
+
 const CARD_TONES = {
   accent:
     'border-accent bg-accent text-accent-foreground shadow-lg',
@@ -16,6 +21,7 @@ interface AboutFeatureCardProps {
   className: string;
   description: string;
   eyebrow: string;
+  icon: StoneIconName;
   metric?: string;
   metricLabel?: string;
   tags?: readonly string[];
@@ -27,6 +33,7 @@ export const AboutFeatureCard = ({
   className,
   description,
   eyebrow,
+  icon,
   metric,
   metricLabel,
   tags,
@@ -34,6 +41,12 @@ export const AboutFeatureCard = ({
   tone = 'light',
 }: AboutFeatureCardProps) => {
   const isAccent = tone === 'accent';
+  const iconTone =
+    tone === 'accent'
+      ? 'inverse'
+      : tone === 'warm'
+        ? 'warm'
+        : 'accent';
 
   return (
     <Card
@@ -41,16 +54,19 @@ export const AboutFeatureCard = ({
       variant="secondary">
       <Card.Content className="flex h-full flex-col justify-between gap-8 p-6 sm:p-7">
         <div>
-          <Chip
-            className={
-              isAccent
-                ? 'bg-white/12 text-white'
-                : 'bg-accent/10 text-accent'
-            }
-            size="sm"
-            variant="soft">
-            {eyebrow}
-          </Chip>
+          <div className="flex items-center justify-between gap-4">
+            <Chip
+              className={
+                isAccent
+                  ? 'bg-white/12 text-white'
+                  : 'bg-accent/10 text-accent'
+              }
+              size="sm"
+              variant="soft">
+              {eyebrow}
+            </Chip>
+            <StoneIcon name={icon} tone={iconTone} />
+          </div>
           <Card.Title
             className={`mt-5 text-2xl leading-tight font-semibold tracking-[-0.035em] ${
               isAccent ? 'text-white' : 'text-foreground'
@@ -65,12 +81,12 @@ export const AboutFeatureCard = ({
           </Card.Description>
         </div>
         {metric && metricLabel && (
-          <div className="flex flex-wrap items-end gap-x-3 gap-y-2">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:gap-4">
             <strong className="max-w-full text-[clamp(2.5rem,10vw,3rem)] leading-none font-semibold tracking-[-0.06em]">
               {metric}
             </strong>
             <span
-              className={`max-w-36 pb-1 text-xs leading-4 ${
+              className={`max-w-44 pb-1 text-sm leading-5 ${
                 isAccent ? 'text-white/70' : 'text-muted'
               }`}>
               {metricLabel}

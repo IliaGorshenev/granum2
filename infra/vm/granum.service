@@ -1,0 +1,27 @@
+[Unit]
+Description=Granum Next.js application
+After=network-online.target minio.service
+Wants=network-online.target minio.service
+
+[Service]
+Type=simple
+User=granum
+Group=granum
+WorkingDirectory=/opt/granum/current
+EnvironmentFile=-/opt/granum/shared/.env
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3001
+ExecStart=/opt/granum/runtime/node/bin/node server.js
+Restart=on-failure
+RestartSec=3
+SuccessExitStatus=143
+TimeoutStopSec=20
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/opt/granum/releases
+
+[Install]
+WantedBy=multi-user.target

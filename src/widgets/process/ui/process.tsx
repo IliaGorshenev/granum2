@@ -6,6 +6,7 @@ import {
 
 import { HOME_SECTION_IDS } from '@/shared/config';
 import { SectionHeading } from '@/shared/ui/section-heading';
+import { StoneIcon } from '@/shared/ui/stone-icon';
 
 import { PROCESS_STEPS } from '../config/steps';
 
@@ -18,6 +19,7 @@ const Process = () => (
       variant="transparent">
       <SectionHeading
         eyebrow="Понятный процесс"
+        icon="measure"
         title="От идеи до готового изделия"
       />
       <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -25,7 +27,8 @@ const Process = () => (
           <Card
             className="min-w-0 border border-border/80 bg-background p-0 shadow-sm"
             key={step.number}>
-            <Card.Header className="px-5 pt-5 pb-2">
+            <Card.Header className="items-center justify-between gap-2 px-5 pt-5 pb-2">
+              <StoneIcon name={step.icon} />
               <Chip color="accent" size="sm" variant="soft">
                 {step.number}
               </Chip>

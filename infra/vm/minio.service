@@ -1,0 +1,25 @@
+[Unit]
+Description=Granum MinIO object storage
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=minio-user
+Group=minio-user
+EnvironmentFile=/etc/granum/minio.env
+ExecStart=/usr/local/bin/minio server \
+  --address 127.0.0.1:9000 \
+  --console-address 127.0.0.1:9001 \
+  /var/lib/granum-minio
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/granum-minio
+
+[Install]
+WantedBy=multi-user.target

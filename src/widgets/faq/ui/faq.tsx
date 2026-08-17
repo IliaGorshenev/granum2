@@ -1,37 +1,32 @@
-import {
-  DisclosureGroup,
-  Surface,
-} from '@heroui/react';
+import Image from 'next/image';
 
-import { HOME_SECTION_IDS } from '@/shared/config';
-import { AccordionPanel } from '@/shared/ui/accordion-panel';
-import { SectionHeading } from '@/shared/ui/section-heading';
+import {
+  AccordionPanel,
+  AccordionStack,
+} from '@/shared/ui/accordion-panel';
 
 import { FAQ_ITEMS } from '../config/faq';
 
 const Faq = () => (
-  <section
-    className="w-full bg-surface px-5 pt-8 pb-14 sm:px-6 sm:pt-10 sm:pb-16"
-    id={HOME_SECTION_IDS.faq}>
-    <Surface
-      className="mx-auto max-w-4xl space-y-8 p-0"
-      variant="transparent">
-      <SectionHeading
-        eyebrow="Перед заказом"
-        title="Частые вопросы"
-      />
-      <DisclosureGroup className="space-y-2">
-        {FAQ_ITEMS.map((item) => (
-          <AccordionPanel
-            id={item.id}
-            key={item.id}
-            title={item.question}>
-            {item.answer}
-          </AccordionPanel>
-        ))}
-      </DisclosureGroup>
-    </Surface>
-  </section>
+  <AccordionStack>
+    {FAQ_ITEMS.map((item) => (
+      <AccordionPanel
+        bodyClassName="space-y-4"
+        id={item.id}
+        key={item.id}
+        title={item.question}>
+        <p>{item.answer}</p>
+        <Image
+          alt={item.imageAlt}
+          className="aspect-[16/7] w-full rounded-xl object-cover max-sm:aspect-[4/3]"
+          height={640}
+          sizes="(max-width: 1024px) calc(100vw - 40px), 550px"
+          src={item.image}
+          width={1200}
+        />
+      </AccordionPanel>
+    ))}
+  </AccordionStack>
 );
 
 export default Faq;
